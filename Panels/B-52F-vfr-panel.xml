@@ -304,6 +304,12 @@ Hacked by Lee Elliott for the B-52F mock panel
    <y>480</y>
   </instrument>
 
+  <instrument include="Instruments/digital-mag-heading.xml">
+   <name>Digital Magnetic Heading</name>
+   <x>668</x>
+   <y>454</y>
+  </instrument>
+
   <instrument include="Aircraft/Instruments/aoa-indexer.xml">
    <name>AoA</name>
    <x>25</x>
