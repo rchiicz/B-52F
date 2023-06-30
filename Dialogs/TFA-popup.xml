@@ -6,7 +6,7 @@
   <layout>vbox</layout>
 
   <text>
-    <label>B-52F Terrain Following-Avoidance popup</label>
+    <label>B-52F Terrain Following-Avoidance Mode</label>
   </text>
 
   <hrule><dummy/></hrule>
@@ -65,11 +65,6 @@
 
   <text>
     <label>press the first letter, or return for default</label>
-    <color>
-      <red>0.5</red>
-      <green>0.5</green>
-      <blue>0.5</blue>
-    </color>
   </text>
 
   <text>
@@ -77,30 +72,11 @@
   </text>
 
   <text>
-    <label>Extend mode (default) is slightly less accurate than</label>
-    <color>
-      <red>0.5</red>
-      <green>0.5</green>
-      <blue>0.5</blue>
-    </color>
+    <label>Extend mode (default) is slightly less accurate than Continuous mode</label>
   </text>
 
   <text>
-    <label>Continuous mode but is more economical in terms of</label>
-    <color>
-      <red>0.5</red>
-      <green>0.5</green>
-      <blue>0.5</blue>
-    </color>
-  </text>
-
-  <text>
-    <label>resource usage</label>
-    <color>
-      <red>0.5</red>
-      <green>0.5</green>
-      <blue>0.5</blue>
-    </color>
+    <label>but is more economical in terms of resource usage.</label>
   </text>
 
 </PropertyList>
