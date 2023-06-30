@@ -17,6 +17,12 @@ B-52F set file.
 
     <flight-model>yasim</flight-model>
     <status>beta</status>
+    <rating>
+      <FDM type="int">3</FDM>
+      <systems type="int">2</systems>
+      <cockpit type="int">2</cockpit>
+      <model type="int">3</model>
+    </rating>
     <author>Lee Elliott</author>
     <aero>B-52F-yasim</aero>
     <fuel-fraction>1.0</fuel-fraction>
