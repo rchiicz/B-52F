@@ -154,6 +154,7 @@ B-52F set file.
     </model>
 
     <systems>
+      <path>Aircraft/B-52F/Systems/systems.xml</path>
       <autopilot>
         <path>Aircraft/B-52F/Systems/B-52F-autopilot.xml</path>
       </autopilot>
