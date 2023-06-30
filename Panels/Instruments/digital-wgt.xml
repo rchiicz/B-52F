@@ -49,7 +49,7 @@
         </transformation>
         <transformation>
           <type>y-shift</type>
-          <offset>-6</offset>
+          <offset>-10</offset>
         </transformation>
       </transformations>
     </layer>

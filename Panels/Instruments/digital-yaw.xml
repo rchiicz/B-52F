@@ -33,7 +33,7 @@
   <layer>
    <name>Title</name>
    <type>text</type>
-   <point-size>18</point-size>
+   <point-size>16</point-size>
    <color>
     <red>0.8</red>
     <green>0.8</green>
@@ -52,7 +52,7 @@
     </transformation>
     <transformation>
      <type>y-shift</type>
-     <offset>-6</offset>
+     <offset>-12</offset>
     </transformation>
    </transformations>
   </layer>

@@ -30,14 +30,15 @@
       </transformations>
     </layer>
 
+    <!-- speed below Vat 170kts -->
     <layer>
-      <name>Title</name>
+      <name>Title Red</name>
       <type>text</type>
       <point-size>18</point-size>
       <color>
         <red>0.8</red>
-        <green>0.8</green>
-        <blue>0.8</blue>
+        <green>0.2</green>
+        <blue>0.2</blue>
       </color>
       <chunks>
         <chunk>
@@ -52,7 +53,41 @@
         </transformation>
         <transformation>
           <type>y-shift</type>
-          <offset>-6</offset>
+          <offset>-12</offset>
+        </transformation>
+      </transformations>
+    </layer>
+
+    <!-- speed above Vat 170kts -->
+    <layer>
+      <condition>
+        <greater-than-equals>
+          <property>/velocities/airspeed-kt</property>
+          <value type="double">170</value>
+        </greater-than-equals>
+      </condition>
+      <name>Title Green</name>
+      <type>text</type>
+      <point-size>18</point-size>
+      <color>
+        <red>0.2</red>
+        <green>0.8</green>
+        <blue>0.2</blue>
+      </color>
+      <chunks>
+        <chunk>
+          <type>literal</type>
+          <text>IAS: </text>
+        </chunk>
+      </chunks>
+      <transformations>
+        <transformation>
+          <type>x-shift</type>
+          <offset>-55</offset>
+        </transformation>
+        <transformation>
+          <type>y-shift</type>
+          <offset>-12</offset>
         </transformation>
       </transformations>
     </layer>
