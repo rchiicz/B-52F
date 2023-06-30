@@ -52,7 +52,7 @@
     </transformation>
     <transformation>
      <type>y-shift</type>
-     <offset>20</offset>
+     <offset>18</offset>
     </transformation>
    </transformations>
   </layer>
@@ -79,7 +79,7 @@
     </transformation>
     <transformation>
      <type>y-shift</type>
-     <offset>5</offset>
+     <offset>1</offset>
     </transformation>
    </transformations>
   </layer>
@@ -135,7 +135,7 @@
     </transformation>
     <transformation>
      <type>y-shift</type>
-     <offset>-10</offset>
+     <offset>-14</offset>
     </transformation>
    </transformations>
   </layer>
@@ -191,7 +191,7 @@
     </transformation>
     <transformation>
      <type>y-shift</type>
-     <offset>-25</offset>
+     <offset>-29</offset>
     </transformation>
    </transformations>
   </layer>

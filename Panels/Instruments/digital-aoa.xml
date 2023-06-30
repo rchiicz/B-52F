@@ -52,7 +52,7 @@
         </transformation>
         <transformation>
           <type>y-shift</type>
-          <offset>-6</offset>
+          <offset>-12</offset>
         </transformation>
       </transformations>
     </layer>
@@ -71,7 +71,7 @@
         <chunk>
           <type>number-value</type>
           <property>/orientation/alpha-deg</property>
-          <format>%02.3f</format>
+          <format>%02.2f</format>
         </chunk>
       </chunks>
       <transformations>

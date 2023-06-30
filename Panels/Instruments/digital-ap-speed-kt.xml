@@ -283,7 +283,7 @@
     </transformation>
     <transformation>
      <type>y-shift</type>
-     <offset>4</offset>
+     <offset>2</offset>
     </transformation>
    </transformations>
   </layer>
@@ -310,7 +310,7 @@
     </transformation>
     <transformation>
      <type>y-shift</type>
-     <offset>-15</offset>
+     <offset>-17</offset>
     </transformation>
    </transformations>
   </layer>
@@ -343,7 +343,7 @@
     </transformation>
     <transformation>
      <type>y-shift</type>
-     <offset>-5</offset>
+     <offset>-9</offset>
     </transformation>
    </transformations>
   </layer>
@@ -376,7 +376,7 @@
     </transformation>
     <transformation>
      <type>y-shift</type>
-     <offset>-5</offset>
+     <offset>-9</offset>
     </transformation>
    </transformations>
   </layer>
@@ -640,7 +640,7 @@
   <action>
    <name>Select KIAS Hold</name>
    <button>0</button>
-   <x>-40</x>
+   <x>-36</x>
    <y>0</y>
    <w>14</w>
    <h>19</h>
@@ -654,7 +654,7 @@
   <action>
    <name>Select Mach Hold</name>
    <button>0</button>
-   <x>-40</x>
+   <x>-36</x>
    <y>-19</y>
    <w>14</w>
    <h>19</h>
