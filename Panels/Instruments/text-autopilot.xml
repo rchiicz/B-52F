@@ -121,10 +121,16 @@
 
     <layer>
       <condition>
-        <equals>
-          <property>/autopilot/locks/auto-take-off</property>
-          <value>disabled</value>
-        </equals>
+        <or>
+          <equals>
+            <property>/autopilot/locks/auto-take-off</property>
+            <value>disabled</value>
+          </equals>
+          <less-than>
+            <property>/surface-positions/flap-pos-norm</property>
+            <value>0.999</value>
+          </less-than>
+        </or>
       </condition>
       <name>Take-Off - disabled</name>
       <type>text</type>
@@ -154,6 +160,10 @@
 
     <layer>
       <condition>
+        <greater-than>
+          <property>/surface-positions/flap-pos-norm</property>
+          <value>0.999</value>
+        </greater-than>
         <equals>
           <property>/autopilot/locks/auto-take-off</property>
           <value>enabled</value>

@@ -5,6 +5,7 @@ B-52F set file.
 
 2006-08-02 Lee Elliott
 2010-09-04 Nguyen Tri Toan Phuc (yasim,effect update)
+2023-07-11 Ron Horn (maintenance and enhancements)
 ************************************************************************
 -->
 
@@ -26,6 +27,13 @@ B-52F set file.
       <model type="int">3</model>
     </rating>
     <author>Lee Elliott</author>
+    <maintainers>
+      <maintainer n="0">
+        <name>Ron Horn</name>
+        <email>rchiicz@gmail.com</email>
+      </maintainer>
+    </maintainers >
+    
     <aero>B-52F-yasim</aero>
     <fuel-fraction>1.0</fuel-fraction>
 

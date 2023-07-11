@@ -30,7 +30,7 @@ override those by providing <w>..</w> and <h>..</h> properties with the
 <x>...</x> and <y>...</y> properties.
 
 Hacked by Lee Elliott for the B-52F mock panel
-
+Enhanced for FG Version 2020.3 by Ron Horn <rchiicz@gmail.com>
 -->
 
 <!DOCTYPE PropertyList SYSTEM "panel.dtd">
@@ -182,7 +182,7 @@ Hacked by Lee Elliott for the B-52F mock panel
 
   <instrument include="Aircraft/Instruments/controls.xml">
    <name>Control Position Indicators</name>
-   <x>38</x>
+   <x>36</x>
    <y>70</y>
    <w>90</w>
    <h>90</h>
@@ -190,23 +190,23 @@ Hacked by Lee Elliott for the B-52F mock panel
 
 <!-- end controls visual feedback cluster -->
 
-  <instrument include="Instruments/attitude-indicator.xml">
+  <instrument include="Aircraft/Instruments/attitude-indicator-hi.xml">
    <name>Attitude Gyro</name>
    <x>103</x>
-   <y>100</y>
+   <y>95</y>
    <w>65</w>
    <h>65</h>
   </instrument>
 
-  <instrument include="Aircraft/Instruments/turn.xml">
-   <name>Turn Coordinator</name>
+  <instrument include="Instruments/adf-hi.xml">
+   <name>ADF Gauge</name>
    <x>166</x>
-   <y>100</y>
+   <y>95</y>
    <w>65</w>
    <h>65</h>
   </instrument>
 
-  <instrument include="Aircraft/Instruments/hsi.xml">
+  <instrument include="Aircraft/Instruments/hsi-hi.xml">
    <name>Horizontal Situation Indicator</name>
    <x>103</x>
    <y>35</y>
@@ -214,11 +214,28 @@ Hacked by Lee Elliott for the B-52F mock panel
    <h>65</h>
   </instrument>
 
+  <instrument include="Aircraft/Instruments/nav1-hi.xml">
+   <name>VOR 2</name>
+   <params>
+    <nav-to-flag>/instrumentation/nav[1]/to-flag</nav-to-flag>
+    <nav-from-flag>/instrumentation/nav[1]/from-flag</nav-from-flag>
+    <nav-radial-selected>/instrumentation/nav[1]/radials/selected-deg</nav-radial-selected>
+    <nav-gs-needle-deflection>/instrumentation/nav[1]/gs-needle-deflection</nav-gs-needle-deflection>
+    <nav-heading-needle-deflection>/instrumentation/nav[1]/heading-needle-deflection</nav-heading-needle-deflection>
+    <nav-has-gs-needle>/sim/instrument-options/nav[1]/has-gs-needle</nav-has-gs-needle>
+    <nav-needles-pivot>/sim/instrument-options/nav[1]/needles-pivot</nav-needles-pivot>
+   </params>
+   <x>166</x>
+   <y>35</y>
+   <w>65</w>
+   <h>65</h>
+  </instrument>
+
   <instrument include="Aircraft/Instruments/aoa-indexer.xml">
    <name>AoAI</name>
-   <x>60</x>
+   <x>58</x>
    <y>70</y>
-   <w>15</w>
+   <w>20</w>
    <h>65</h>
   </instrument>
 
@@ -323,16 +340,16 @@ Hacked by Lee Elliott for the B-52F mock panel
   <instrument include="Instruments/digital-steering.xml">
    <name>Steering display</name>
    <x>248</x>
-   <y>62</y>
+   <y>63</y>
    <w>100</w>
-   <h>48</h>
+   <h>50</h>
   </instrument>
 
   <instrument include="Instruments/digital-wind-speed-direction.xml">
    <name>Wind speed/direction display</name>
-   <x>243</x>
+   <x>248</x>
    <y>20</y>
-   <w>110</w>
+   <w>100</w>
    <h>34</h>
   </instrument>
 

@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 
 <!--
-Cessna 310 panel.
-November 2001
-John Check <j4strngs@rockfish.net>
+Based on: Cessna 310 panel.
+          November 2001
+          John Check <j4strngs@rockfish.net>
 _______________________________________________________________________
 
 This is a panel configuration file for the open-source flight
@@ -30,7 +30,7 @@ override those by providing <w>..</w> and <h>..</h> properties with the
 <x>...</x> and <y>...</y> properties.
 
 Hacked by Lee Elliott for the B-52F mock panel
-
+Enhanced for FG Version 2020.3 by Ron Horn <rchiicz@gmail.com>
 -->
 
 <!DOCTYPE PropertyList SYSTEM "panel.dtd">
@@ -38,86 +38,91 @@ Hacked by Lee Elliott for the B-52F mock panel
 <PropertyList>
 
  <name>B-52 F mock VFR Panel</name>
- <background>Aircraft/B-52F/Panels/Textures/B-52F-panel-bg.rgb</background>
+ <background>Aircraft/B-52F/Panels/Textures/panel-trans-mini-bg.rgb</background>
  <w>1424</w>
- <h>468</h>
+ <h>358</h>
  <y-offset>0</y-offset>
- <view-height>440</view-height>
+ <view-height>340</view-height>
 
  <instruments>
 
+  <instrument include="Aircraft/Instruments/clock.xml">
+   <name>Chronometer</name>
+   <x>56</x>
+   <y>280</y>
+   <w>90</w>
+   <h>90</h>
+  </instrument>
+
   <instrument include="Aircraft/Instruments/dme.xml">
    <name>DME Display</name>
-   <x>100</x>
-   <y>330</y>
+   <x>172</x>
+   <y>280</y>
    <w>100</w>
    <h>50</h>
   </instrument>
 
-  <instrument include="Aircraft/Instruments/clock.xml">
-   <name>Chronometer</name>
-   <x>320</x>
-   <y>300</y>
-   <w>90</w>
-   <h>90</h>
-  </instrument>
-
-  <instrument include="Aircraft/Instruments/turn.xml">
-   <name>Turn Coordinator</name>
-   <x>220</x>
-   <y>225</y>
+  <!-- Six Pack Instruments -->
+  
+  <instrument include="Aircraft/Instruments/asi-590-knot-a4c.xml">
+   <name>Indicated Airspeed</name>
+   <x>56</x>
+   <y>170</y>
    <w>120</w>
    <h>120</h>
   </instrument>
 
-  <instrument include="Instruments/attitude-indicator.xml">
+  <instrument include="Aircraft/Instruments/attitude-indicator-hi.xml">
    <name>Attitude Indicator</name>
-   <x>100</x>
-   <y>225</y>
+   <x>172</x>
+   <y>170</y>
    <w>120</w>
    <h>120</h>
   </instrument>
 
-  <instrument include="Aircraft/Instruments/hsi.xml">
+  <instrument include="Aircraft/Instruments/altimeter.xml">
+   <name>Altimeter</name>
+   <x>290</x>
+   <y>170</y>
+   <w>120</w>
+   <h>120</h>
+  </instrument>
+  
+  <instrument include="Aircraft/Instruments/turn-hi.xml">
+   <name>Turn Coordinator</name>
+   <x>56</x>
+   <y>56</y>
+   <w>120</w>
+   <h>120</h>
+  </instrument>
+
+  <instrument include="Instruments/hsi-hi.xml">
    <name>Horizontal Situation Indicator</name>
-   <x>220</x>
-   <y>352</y>
+   <x>172</x>
+   <y>56</y>
    <w>120</w>
    <h>120</h>
   </instrument>
 
-<!-- controls visual feedback cluster -->
-
-  <instrument include="Aircraft/Instruments/gear-indicator.xml">
-   <name>Gear Indicator Light</name>
-   <x>320</x>
-   <y>159</y>
-   <w>40</w>
-   <h>17</h>
+  <instrument include="Aircraft/Instruments/vertical-hi.xml">
+   <name>Vertical Speed</name>
+   <x>290</x>
+   <y>56</y>
+   <w>120</w>
+   <h>120</h>
   </instrument>
 
-  <instrument include="Aircraft/Instruments/brakes.xml">
-   <name>Brake Indicator Light</name>
-   <x>320</x>
-   <y>140</y>
-   <w>40</w>
-   <h>17</h>
+  <!-- Secondary Nav Instruments -->
+
+  <instrument include="Instruments/adf-hi.xml">
+   <name>ADF Gauge</name>
+   <x>406</x>
+   <y>170</y>
+   <w>120</w>
+   <h>120</h>
   </instrument>
 
-  <instrument include="Aircraft/Instruments/controls.xml">
-   <name>Control Position Indicators</name>
-   <x>320</x>
-   <y>80</y>
-   <w>90</w>
-   <h>90</h>
-  </instrument>
-
-<!-- end controls visual feedback cluster -->
-
-
-<!-- radio nav instruments  -->
-
-  <instrument include="Aircraft/Instruments/nav1.xml">
+  <instrument include="Instruments/nav1-hi.xml">
    <name>VOR 2 Gauge</name>
    <params>
     <nav-to-flag>/instrumentation/nav[1]/to-flag</nav-to-flag>
@@ -128,28 +133,66 @@ Hacked by Lee Elliott for the B-52F mock panel
     <nav-has-gs-needle>/sim/instrument-options/nav[1]/has-gs-needle</nav-has-gs-needle>
     <nav-needles-pivot>/sim/instrument-options/nav[1]/needles-pivot</nav-needles-pivot>
    </params>
-   <x>225</x>
-   <y>99</y>
+   <x>406</x>
+   <y>60</y>
    <w>120</w>
    <h>120</h>
   </instrument>
 
-<!-- end radio nav instruments -->
+  <!-- controls visual feedback cluster -->
 
-  <instrument include="Aircraft/Instruments/gyro.xml">
-   <name>Directional Gauge</name>
-   <x>100</x>
-   <y>99</y>
-   <w>120</w>
-   <h>120</h>
+  <instrument include="Aircraft/Instruments/gear-indicator.xml">
+   <name>Gear Indicator Light</name>
+   <x>554</x>
+   <y>107</y>
+   <w>40</w>
+   <h>17</h>
   </instrument>
 
-<!-- radio stack -->
+  <instrument include="Aircraft/Instruments/brakes.xml">
+   <name>Brake Indicator Light</name>
+   <x>510</x>
+   <y>108</y>
+   <w>40</w>
+   <h>17</h>
+  </instrument>
+
+  <instrument include="Aircraft/Instruments/controls.xml">
+   <name>Control Position Indicators</name>
+   <x>532</x>
+   <y>48</y>
+   <w>90</w>
+   <h>90</h>
+  </instrument>
+
+  <instrument include="Aircraft/Instruments/aoa-indexer.xml">
+   <name>AoA</name>
+   <x>555</x>
+   <y>47</y>
+   <w>20</w>
+   <h>65</h>
+  </instrument>
+
+  <!-- Mag compass stack -->
+
+  <instrument include="Aircraft/Instruments/magcompass.xml">
+   <name>Magnetic Compass</name>
+   <x>918</x>
+   <y>359</y>
+  </instrument>
+
+  <instrument include="Instruments/digital-mag-heading.xml">
+   <name>Digital Magnetic Heading</name>
+   <x>918</x>
+   <y>334</y>
+  </instrument>
+
+  <!-- radio stack -->
 
   <instrument include="Aircraft/Instruments/markerbeacon.xml">
    <name>Marker Beacon Indicators</name>
    <x>798</x>
-   <y>450</y>
+   <y>335</y>
    <w>70</w>
    <h>22</h>
   </instrument>
@@ -157,7 +200,7 @@ Hacked by Lee Elliott for the B-52F mock panel
   <instrument include="Aircraft/Instruments/navcom-kx155.xml">
    <name>NavCom 1 Radio</name>
    <x>890</x>
-   <y>395</y>
+   <y>282</y>
   </instrument>
 
   <instrument include="Aircraft/Instruments/navcom-kx155.xml">
@@ -171,19 +214,19 @@ Hacked by Lee Elliott for the B-52F mock panel
     <nav-morse-ident-toggle-prop>/instrumentation/nav[1]/ident</nav-morse-ident-toggle-prop>
    </params>
    <x>890</x>
-   <y>309</y>
+   <y>196</y>
   </instrument>
 
   <instrument include="Aircraft/Instruments/adf-radio.xml">
    <name>ADF Radio</name>
    <x>890</x>
-   <y>235</y>
+   <y>122</y>
   </instrument>
 
   <instrument include="Aircraft/Instruments/autopilot.xml">
    <name>Autopilot</name>
    <x>890</x>
-   <y>191</y>
+   <y>79</y>
   </instrument>
 
 <!-- end radio stack -->
@@ -193,7 +236,7 @@ Hacked by Lee Elliott for the B-52F mock panel
    <params>
     <engine-throttle-select>/controls/engines/engine[0]/throttle</engine-throttle-select>
    </params>
-   <x>580</x>
+   <x>600</x>
    <y>30</y>
    <w>12</w>
    <h>50</h>
@@ -204,7 +247,7 @@ Hacked by Lee Elliott for the B-52F mock panel
    <params>
     <engine-throttle-select>/controls/engines/engine[1]/throttle</engine-throttle-select>
    </params>
-   <x>595</x>
+   <x>615</x>
    <y>30</y>
    <w>12</w>
    <h>50</h>
@@ -215,7 +258,7 @@ Hacked by Lee Elliott for the B-52F mock panel
    <params>
     <engine-throttle-select>/controls/engines/engine[2]/throttle</engine-throttle-select>
    </params>
-   <x>610</x>
+   <x>630</x>
    <y>30</y>
    <w>12</w>
    <h>50</h>
@@ -226,7 +269,7 @@ Hacked by Lee Elliott for the B-52F mock panel
    <params>
     <engine-throttle-select>/controls/engines/engine[3]/throttle</engine-throttle-select>
    </params>
-   <x>625</x>
+   <x>645</x>
    <y>30</y>
    <w>12</w>
    <h>50</h>
@@ -237,7 +280,7 @@ Hacked by Lee Elliott for the B-52F mock panel
    <params>
     <engine-throttle-select>/controls/engines/engine[4]/throttle</engine-throttle-select>
    </params>
-   <x>640</x>
+   <x>660</x>
    <y>30</y>
    <w>12</w>
    <h>50</h>
@@ -248,7 +291,7 @@ Hacked by Lee Elliott for the B-52F mock panel
    <params>
     <engine-throttle-select>/controls/engines/engine[5]/throttle</engine-throttle-select>
    </params>
-   <x>655</x>
+   <x>675</x>
    <y>30</y>
    <w>12</w>
    <h>50</h>
@@ -259,7 +302,7 @@ Hacked by Lee Elliott for the B-52F mock panel
    <params>
     <engine-throttle-select>/controls/engines/engine[6]/throttle</engine-throttle-select>
    </params>
-   <x>670</x>
+   <x>690</x>
    <y>30</y>
    <w>12</w>
    <h>50</h>
@@ -270,7 +313,7 @@ Hacked by Lee Elliott for the B-52F mock panel
    <params>
     <engine-throttle-select>/controls/engines/engine[7]/throttle</engine-throttle-select>
    </params>
-   <x>685</x>
+   <x>705</x>
    <y>30</y>
    <w>12</w>
    <h>50</h>
@@ -281,7 +324,7 @@ Hacked by Lee Elliott for the B-52F mock panel
    <params>
     <flaps-select>/controls/flight/flaps</flaps-select>
    </params>
-   <x>700</x>
+   <x>720</x>
    <y>30</y>
    <w>12</w>
    <h>50</h>
@@ -292,36 +335,14 @@ Hacked by Lee Elliott for the B-52F mock panel
    <params>
     <engine-reheat-select>/controls/engines/engine[0]/afterburner</engine-reheat-select>
    </params>
-   <x>715</x>
+   <x>735</x>
    <y>30</y>
    <w>12</w>
    <h>50</h>
   </instrument>
 
-  <instrument include="Aircraft/Instruments/magcompass.xml">
-   <name>Magnetic Compass</name>
-   <x>668</x>
-   <y>480</y>
-  </instrument>
+  <!-- AP Instruments -->
 
-  <instrument include="Instruments/digital-mag-heading.xml">
-   <name>Digital Magnetic Heading</name>
-   <x>668</x>
-   <y>454</y>
-  </instrument>
-
-  <instrument include="Aircraft/Instruments/aoa-indexer.xml">
-   <name>AoA</name>
-   <x>25</x>
-   <y>250</y>
-   <w>40</w>
-   <h>70</h>
-  </instrument>
-
-
-<!-- AP Instruments -->
-
-<!-- Text AP Block -->
   <instrument include="Instruments/text-autopilot.xml">
    <name>AP display</name>
    <params>
@@ -331,7 +352,7 @@ Hacked by Lee Elliott for the B-52F mock panel
     <gs-select>autopilot/locks/altitude</gs-select>
    </params>
    <x>864</x>
-   <y>155</y>
+   <y>55</y>
    <w>200</w>
    <h>20</h>
   </instrument>
@@ -345,7 +366,7 @@ Hacked by Lee Elliott for the B-52F mock panel
     <mach-ctrl>/autopilot/settings/target-mach</mach-ctrl>
    </params>
    <x>827</x>
-   <y>122</y>
+   <y>22</y>
    <w>124</w>
    <h>40</h>
   </instrument>
