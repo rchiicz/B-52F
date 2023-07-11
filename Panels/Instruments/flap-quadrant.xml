@@ -97,7 +97,7 @@ extended/retracted in a single step.
    <binding>
     <command>property-adjust</command>
     <property alias="../../../../params/flaps-select"/>
-    <step>-0.25</step>
+    <step>-1.0</step>
     <min>0</min>
     <max>1.0</max>
     <wrap>false</wrap>
@@ -114,7 +114,7 @@ extended/retracted in a single step.
    <binding>
     <command>property-adjust</command>
     <property alias="../../../../params/flaps-select"/>
-    <step>0.25</step>
+    <step>1.0</step>
     <min>0</min>
     <max>1.0</max>
     <wrap>false</wrap>

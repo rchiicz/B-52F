@@ -124,7 +124,7 @@ Lee Elliott.
     <control-output control="SPOILER" side="right" prop="/surface-positions/right-spoiler-pos-norm"/>
     <control-output control="SPOILER" prop="/surface-positions/spoiler-pos-norm"/>
 
-    <control-speed control="FLAP0" transition-time="60"/>
+    <control-speed control="FLAP0" transition-time="120"/>
     <control-speed control="FLAP1" transition-time="0.5"/>
     <control-speed control="SPOILER" transition-time="1.5"/>
   </wing>
@@ -215,7 +215,7 @@ Lee Elliott.
 <!-- Front Left -->
   <gear x="-13.4" y="2.0" z="-3.0" retract-time="14" compression="1.0" spring="1.2" damp="1.5">
     <control-input axis="/controls/gear/steering-front-norm" control="STEER"/>
-    <control-input axis="/controls/flight/rudder" control="STEER"/>
+    <control-input axis="/controls/flight/rudder" control="STEER" square="true"/>
     <control-input axis="/controls/gear/gear-down" control="EXTEND"/>
     <control-input axis="/controls/gear/brake-left" control="BRAKE"/>
     <control-input axis="/controls/gear/brake-right" control="BRAKE"/>
@@ -229,7 +229,7 @@ Lee Elliott.
 <!-- Front Right -->
   <gear x="-13.4" y="-2.0" z="-3.0" retract-time="14" compression="1.0" spring="1.2" damp="1.5">
     <control-input axis="/controls/gear/steering-front-norm" control="STEER"/>
-    <control-input axis="/controls/flight/rudder" control="STEER"/>
+    <control-input axis="/controls/flight/rudder" control="STEER" square="true"/>
     <control-input axis="/controls/gear/gear-down" control="EXTEND"/>
     <control-input axis="/controls/gear/brake-left" control="BRAKE"/>
     <control-input axis="/controls/gear/brake-right" control="BRAKE"/>
