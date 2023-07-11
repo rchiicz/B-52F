@@ -17,6 +17,8 @@ B-52F set file.
 
     <flight-model>yasim</flight-model>
     <status>beta</status>
+    <aircraft-version>2020.3</aircraft-version>
+    <minimum-fg-version>2018.3.0</minimum-fg-version>
     <rating>
       <FDM type="int">3</FDM>
       <systems type="int">2</systems>
