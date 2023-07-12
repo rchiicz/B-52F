@@ -30,7 +30,7 @@
       </transformations>
     </layer>
 
-    <!-- speed below Vat 170kts -->
+    <!-- speed below yasim approach speed -->
     <layer>
       <name>Title Red</name>
       <type>text</type>
@@ -58,12 +58,12 @@
       </transformations>
     </layer>
 
-    <!-- speed above Vat 170kts -->
+    <!-- speed above yasim approach speed -->
     <layer>
       <condition>
         <greater-than-equals>
           <property>/velocities/airspeed-kt</property>
-          <value type="double">170</value>
+          <value type="double">155</value>
         </greater-than-equals>
       </condition>
       <name>Title Green</name>

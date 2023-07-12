@@ -72,7 +72,7 @@ Enhanced for FG Version 2020.3 by Ron Horn <rchiicz@gmail.com>
    <h>120</h>
   </instrument>
 
-  <instrument include="Aircraft/Instruments/attitude-indicator-hi.xml">
+  <instrument include="Instruments/attitude-indicator-hi.xml">
    <name>Attitude Indicator</name>
    <x>172</x>
    <y>170</y>

@@ -167,7 +167,7 @@ Enhanced for FG Version 2020.3 by Ron Horn <rchiicz@gmail.com>
   <instrument include="Aircraft/Instruments/brakes.xml">
    <name>Brake Indicator Light</name>
    <x>18</x>
-   <y>130</y>
+   <y>132</y>
    <w>32</w>
    <h>15</h>
   </instrument>
@@ -175,7 +175,7 @@ Enhanced for FG Version 2020.3 by Ron Horn <rchiicz@gmail.com>
   <instrument include="Aircraft/Instruments/gear-indicator.xml">
    <name>Gear Indicator Light</name>
    <x>58</x>
-   <y>130</y>
+   <y>132</y>
    <w>32</w>
    <h>14</h>
   </instrument>
@@ -183,14 +183,14 @@ Enhanced for FG Version 2020.3 by Ron Horn <rchiicz@gmail.com>
   <instrument include="Aircraft/Instruments/controls.xml">
    <name>Control Position Indicators</name>
    <x>36</x>
-   <y>70</y>
+   <y>80</y>
    <w>90</w>
-   <h>90</h>
+   <h>80</h>
   </instrument>
 
 <!-- end controls visual feedback cluster -->
 
-  <instrument include="Aircraft/Instruments/attitude-indicator-hi.xml">
+  <instrument include="Instruments/attitude-indicator-hi.xml">
    <name>Attitude Gyro</name>
    <x>103</x>
    <y>95</y>
@@ -204,6 +204,14 @@ Enhanced for FG Version 2020.3 by Ron Horn <rchiicz@gmail.com>
    <y>95</y>
    <w>65</w>
    <h>65</h>
+  </instrument>
+
+  <instrument include="Aircraft/Instruments/dme.xml">
+   <name>DME Display</name>
+   <x>36</x>
+   <y>20</y>
+   <w>70</w>
+   <h>34</h>
   </instrument>
 
   <instrument include="Aircraft/Instruments/hsi-hi.xml">
@@ -234,7 +242,7 @@ Enhanced for FG Version 2020.3 by Ron Horn <rchiicz@gmail.com>
   <instrument include="Aircraft/Instruments/aoa-indexer.xml">
    <name>AoAI</name>
    <x>58</x>
-   <y>70</y>
+   <y>80</y>
    <w>20</w>
    <h>65</h>
   </instrument>
