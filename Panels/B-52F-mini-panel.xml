@@ -495,8 +495,8 @@ Enhanced for FG Version 2020.3 by Ron Horn <rchiicz@gmail.com>
    <params>
     <kias-disp>/autopilot/settings/target-speed-kt</kias-disp>
     <kias-ctrl>/autopilot/settings/target-speed-kt</kias-ctrl>
-    <mach-disp>/autopilot/settings/target-mach</mach-disp>
-    <mach-ctrl>/autopilot/settings/target-mach</mach-ctrl>
+    <mach-disp>/autopilot/settings/target-speed-mach</mach-disp>
+    <mach-ctrl>/autopilot/settings/target-speed-mach</mach-ctrl>
    </params>
    <x>564</x>
    <y>118</y>

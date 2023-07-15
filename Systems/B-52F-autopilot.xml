@@ -61,15 +61,6 @@
   </filter>
   
   <filter>
-    <name>Target Altitude Filter</name>
-    <debug>false</debug>
-    <type>noise-spike</type>
-    <input>/autopilot/settings/target-altitude-ft</input>
-    <output>/autopilot/internal/target-altitude-ft-filtered</output>
-    <max-rate-of-change>100</max-rate-of-change>
-  </filter>
-  
-  <filter>
     <name>GS1 Filter 1</name>
     <debug>false</debug>
     <type>noise-spike</type>
@@ -454,7 +445,7 @@
       <prop>/position/altitude-ft</prop>
     </input>
     <reference>
-      <prop>/autopilot/internal/target-altitude-ft-filtered</prop>
+      <property>/autopilot/settings/target-altitude-ft</property>
     </reference>
     <output>
       <prop>/autopilot/settings/target-climb-rate-fps</prop>
@@ -754,7 +745,7 @@
       <prop>/velocities/mach</prop>
     </input>
     <reference>
-      <prop>/autopilot/settings/target-mach</prop>
+      <prop>/autopilot/settings/target-speed-mach</prop>
     </reference>
     <output>
       <prop>/controls/engines/engine[0]/throttle</prop>
@@ -796,7 +787,7 @@
       <value>mach-climb</value>
     </enable>
     <input>
-      <prop>/autopilot/settings/target-mach</prop>
+      <prop>/autopilot/settings/target-speed-mach</prop>
     </input>
     <reference>
       <prop>/velocities/mach</prop>
@@ -945,20 +936,64 @@
 <!--
     Simple VFPS hold
     
-    Uses the Target Climb Rate Filter
+    Setting from default AP dialog: Vertical Speed.
+    Converts the desired input from FPM to FPS using a scale element.
+    Input setting is forced to start at zero, and is rate-limited to
+      avoid sudden changes which can cause oscillation.
 -->
+
+  <filter>
+    <name>VFPS Target Resetter</name>
+    <enable>
+      <condition>
+        <not-equals>
+          <property>/autopilot/locks/altitude</property>
+          <value>vertical-speed-hold</value>
+        </not-equals>
+      </condition>
+    </enable>
+    <type>gain</type>
+    <input>0.0</input>
+    <output>/autopilot/internal/target-vertical-speed-fpm</output>
+  </filter>
+
+  <filter>
+    <name>VFPS Target Filter</name>
+    <enable>
+      <prop>/autopilot/locks/altitude</prop>
+      <value>vertical-speed-hold</value>
+    </enable>
+    <type>noise-spike</type>
+    <!-- request more gradual changes at higher altitude to avoid oscillations -->
+		<max-rate-of-change>
+			<expression>
+				<table>
+					<property>/position/altitude-ft</property>
+					<entry><ind>0</ind><dep>200</dep></entry>
+					<entry><ind>20000</ind><dep>100</dep></entry>
+					<entry><ind>30000</ind><dep>50</dep></entry>
+					<entry><ind>40000</ind><dep>10</dep></entry>
+				</table>
+			</expression>
+		</max-rate-of-change>
+    <initialize-to>output</initialize-to>
+    <input>/autopilot/settings/vertical-speed-fpm</input>
+    <output>/autopilot/internal/target-vertical-speed-fpm</output>
+  </filter>
+
   <pid-controller>
     <name>VFPS Hold</name>
     <debug>false</debug>
     <enable>
       <prop>/autopilot/locks/altitude</prop>
-      <value>vfps-hold</value>
+      <value>vertical-speed-hold</value>
     </enable>
     <input>
       <prop>/velocities/vertical-speed-fps</prop>
     </input>
     <reference>
-      <prop>/autopilot/internal/target-climb-rate-fps-filtered</prop>
+      <prop>/autopilot/internal/target-vertical-speed-fpm</prop>
+      <scale>0.01666666</scale>
     </reference>
      <output>
       <prop>/controls/flight/elevator-trim</prop>

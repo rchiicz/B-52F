@@ -12,8 +12,8 @@
  <params>
   <kias-disp>/autopilot/settings/target-speed-kt</kias-disp>
   <kias-ctrl>/autopilot/settings/target-speed-kt</kias-ctrl>
-  <mach-disp>/autopilot/settings/target-mach</mach-disp>
-  <mach-ctrl>/autopilot/settings/target-mach</mach-ctrl>
+  <mach-disp>/autopilot/settings/target-speed-mach</mach-disp>
+  <mach-ctrl>/autopilot/settings/target-speed-mach</mach-ctrl>
  </params>
 
  <layers>

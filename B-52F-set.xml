@@ -155,7 +155,8 @@ B-52F set file.
     </panel_2>
 
     <hud>
-      <visibility n="1">true</visibility>
+			<enable3d n="1">false</enable3d>
+      <visibility n="1">false</visibility>
     </hud>
 
     <model>
@@ -411,7 +412,7 @@ B-52F set file.
       <target-altitude-ft type="float">3000</target-altitude-ft>
       <target-aoa-deg type="float">1.0</target-aoa-deg>
       <target-climb-rate-fps type="float">1.0</target-climb-rate-fps>
-      <target-mach type="float">0.46</target-mach>
+      <target-speed-mach type="float">0.46</target-speed-mach>
       <target-pitch-deg type="float">0</target-pitch-deg>
       <target-roll-deg type="float">0.0</target-roll-deg>
       <target-speed-kt type="float">310.0</target-speed-kt>
