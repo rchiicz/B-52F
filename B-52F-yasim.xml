@@ -19,7 +19,7 @@ so in that respect this config is definitely a hack.
 Lee Elliott.
 -->
 
-<airplane mass="173599">
+<airplane version="2018.1" mass="173599" mtow-lbs="450000">
 
 <!-- Approach configuration -->
   <approach speed="155" aoa="1.0" fuel="0.9">
@@ -50,8 +50,9 @@ Lee Elliott.
      570 mph (495 kt) @ 46500 ft
      523 mph (454 kt) cruising speed (no alt specified)
 
+     latest yasim version (bug fixes) needed cruise speed/alt change to avoid going supersonic.
 -->
-  <cruise speed="495" alt="46200" fuel="0.6">
+  <cruise speed="450" alt="45000" fuel="0.6">
     <control-setting axis="/controls/engines/engine[0]/throttle" value="1"/>
     <control-setting axis="/controls/engines/engine[1]/throttle" value="1"/>
     <control-setting axis="/controls/engines/engine[2]/throttle" value="1"/>
