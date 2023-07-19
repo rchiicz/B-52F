@@ -52,7 +52,7 @@ Lee Elliott.
 
      latest yasim version (bug fixes) needed cruise speed/alt change to avoid going supersonic.
 -->
-  <cruise speed="450" alt="45000" fuel="0.6">
+  <cruise speed="495" alt="46500" fuel="0.6">
     <control-setting axis="/controls/engines/engine[0]/throttle" value="1"/>
     <control-setting axis="/controls/engines/engine[1]/throttle" value="1"/>
     <control-setting axis="/controls/engines/engine[2]/throttle" value="1"/>
