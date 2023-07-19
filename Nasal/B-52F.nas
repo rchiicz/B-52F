@@ -153,7 +153,7 @@ var atl_initiation = func {
   setprop("/autopilot/locks/aoa", "aoa-with-speed");
 
   setprop("/autopilot/settings/target-climb-rate-fps", cvfps);
-  setprop("/autopilot/locks/altitude", "vfps-hold");
+  setprop("/autopilot/locks/altitude", "atl-vfps-hold");
   interpolate("/autopilot/settings/target-climb-rate-fps", 0, 10);
   
   # Set the A/P Heading lock to nav1-hold.

@@ -933,67 +933,19 @@
     </config>
    </pid-controller>
 
-<!--
-    Simple VFPS hold
-    
-    Setting from default AP dialog: Vertical Speed.
-    Converts the desired input from FPM to FPS using a scale element.
-    Input setting is forced to start at zero, and is rate-limited to
-      avoid sudden changes which can cause oscillation.
--->
-
-  <filter>
-    <name>VFPS Target Resetter</name>
-    <enable>
-      <condition>
-        <not-equals>
-          <property>/autopilot/locks/altitude</property>
-          <value>vertical-speed-hold</value>
-        </not-equals>
-      </condition>
-    </enable>
-    <type>gain</type>
-    <input>0.0</input>
-    <output>/autopilot/internal/target-vertical-speed-fpm</output>
-  </filter>
-
-  <filter>
-    <name>VFPS Target Filter</name>
-    <enable>
-      <prop>/autopilot/locks/altitude</prop>
-      <value>vertical-speed-hold</value>
-    </enable>
-    <type>noise-spike</type>
-    <!-- request more gradual changes at higher altitude to avoid oscillations -->
-		<max-rate-of-change>
-			<expression>
-				<table>
-					<property>/position/altitude-ft</property>
-					<entry><ind>0</ind><dep>200</dep></entry>
-					<entry><ind>20000</ind><dep>100</dep></entry>
-					<entry><ind>30000</ind><dep>50</dep></entry>
-					<entry><ind>40000</ind><dep>10</dep></entry>
-				</table>
-			</expression>
-		</max-rate-of-change>
-    <initialize-to>output</initialize-to>
-    <input>/autopilot/settings/vertical-speed-fpm</input>
-    <output>/autopilot/internal/target-vertical-speed-fpm</output>
-  </filter>
-
+<!-- VFPS-HOLD - used internally by the "auto landing" script -->
   <pid-controller>
     <name>VFPS Hold</name>
     <debug>false</debug>
     <enable>
       <prop>/autopilot/locks/altitude</prop>
-      <value>vertical-speed-hold</value>
+      <value>atl-vfps-hold</value>
     </enable>
     <input>
       <prop>/velocities/vertical-speed-fps</prop>
     </input>
     <reference>
-      <prop>/autopilot/internal/target-vertical-speed-fpm</prop>
-      <scale>0.01666666</scale>
+      <prop>/autopilot/internal/target-climb-rate-fps-filtered</prop>
     </reference>
      <output>
       <prop>/controls/flight/elevator-trim</prop>
@@ -1008,6 +960,43 @@
       <Td>0.1</Td>
       <u_min>-1.0</u_min>
       <u_max>1.0</u_max>
+    </config>
+  </pid-controller>
+
+<!--
+    VFPS hold - Via the default A/P Dialog
+    
+    Setting from default AP dialog: Vertical Speed.
+    Converts the desired input from FPM to FPS using a scale element.
+-->
+  <pid-controller>
+    <name>Vertical Speed Dialog Hold</name>
+    <debug>false</debug>
+    <enable>
+      <prop>/autopilot/locks/altitude</prop>
+      <value>vertical-speed-hold</value>
+    </enable>
+    <input>
+      <prop>/velocities/vertical-speed-fps</prop>
+    </input>
+    <reference>
+      <prop>/autopilot/settings/vertical-speed-fpm</prop>
+      <scale>0.01666666</scale>
+    </reference>
+     <output>
+      <prop>/controls/flight/elevator-trim</prop>
+    </output>
+    <config>
+      <Ts>0.01</Ts>
+      <Kp>-0.003</Kp>      <!-- proportional gain -->
+      <beta>1.0</beta>    <!-- input value weighing factor -->
+      <alpha>0.1</alpha>  <!-- low pass filter weighing factor -->
+      <gamma>0.0</gamma>  <!-- input value weighing factor for -->
+                          <!-- unfiltered derivative error -->
+      <Ti>4.0</Ti>       <!-- integrator time -->
+      <Td>0.00001</Td>    <!-- derivator time -->
+      <u_min>-1.0</u_min> <!-- minimum output clamp -->
+      <u_max>1.0</u_max>  <!-- maximum output clamp -->
     </config>
   </pid-controller>
 
