@@ -389,10 +389,10 @@ properties' values.
   <action>
    <name>small clockwise rotation</name>
    <button>0</button>
-   <x>-64</x>
-   <y>-64</y>
-   <w>13</w>
-   <h>26</h>
+    <x>-56</x>
+    <y>-56</y>
+    <w>12</w>
+    <h>24</h>
    <binding>
     <command>property-adjust</command>
     <property alias="../../../../params/nav-radial-selected"/>
@@ -406,10 +406,10 @@ properties' values.
   <action>
    <name>large clockwise rotation</name>
    <button>1</button>
-   <x>-64</x>
-   <y>-64</y>
-   <w>13</w>
-   <h>26</h>
+   <x>-56</x>
+   <y>-56</y>
+   <w>12</w>
+   <h>24</h>
    <binding>
     <command>property-adjust</command>
     <property alias="../../../../params/nav-radial-selected"/>
@@ -423,10 +423,10 @@ properties' values.
   <action>
    <name>small counter-clockwise rotation</name>
    <button>0</button>
-   <x>-51</x>
-   <y>-64</y>
-   <w>13</w>
-   <h>26</h>
+   <x>-46</x>
+   <y>-56</y>
+   <w>12</w>
+   <h>24</h>
    <binding>
     <command>property-adjust</command>
     <property alias="../../../../params/nav-radial-selected"/>
@@ -440,10 +440,10 @@ properties' values.
   <action>
    <name>large counter-clockwise rotation</name>
    <button>1</button>
-   <x>-51</x>
-   <y>-64</y>
-   <w>13</w>
-   <h>26</h>
+    <x>-46</x>
+    <y>-56</y>
+    <w>12</w>
+    <h>24</h>
    <binding>
     <command>property-adjust</command>
     <property alias="../../../../params/nav-radial-selected"/>
