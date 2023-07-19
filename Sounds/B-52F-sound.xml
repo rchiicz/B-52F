@@ -555,6 +555,62 @@
       </volume>
     </spoiler>
 
+    <overspeed>
+      <name>overspeed</name>
+      <path>Sounds/overspeed2.wav</path>
+      <mode>looped</mode>
+      <condition>
+        <or>
+          <greater-than>
+            <property n="0">/velocities/airspeed-kt</property>
+            <property n="1">/limits/vmo</property>
+          </greater-than>
+          <greater-than>
+            <property n="0">/velocities/mach</property>
+            <property n="1">/limits/mmo</property>
+          </greater-than>
+        </or>
+      </condition>
+      <volume>
+        <property>/velocities/airspeed-kt</property>
+        <max>0.4</max>
+      </volume>
+    </overspeed>
+
+    <gear-overspeed>
+      <name>gear-overspeed</name>
+      <path>Sounds/overspeed.wav</path>
+      <mode>looped</mode>
+      <condition>
+        <property>/gear/gear[0]/position-norm</property>
+        <greater-than>
+          <property n="0">/velocities/airspeed-kt</property>
+          <property n="1">/limits/max-gear-extension-speed</property>
+        </greater-than>
+      </condition>
+      <volume>
+        <property>/velocities/airspeed-kt</property>
+        <max>0.4</max>
+      </volume>
+    </gear-overspeed>
+
+    <flaps-overspeed>
+      <name>flaps-overspeed</name>
+      <path>Sounds/overspeed.wav</path>
+      <mode>looped</mode>
+      <condition>
+        <property>/surface-positions/flap-pos-norm</property>
+        <greater-than>
+          <property n="0">/velocities/airspeed-kt</property>
+          <property n="1">/limits/max-flap-extension-speed[0]/speed</property>
+        </greater-than>
+      </condition>
+      <volume>
+        <property>/velocities/airspeed-kt</property>
+        <max>0.4</max>
+      </volume>
+    </flaps-overspeed>
+    
     <stall>
       <name>stall</name>
       <path>Sounds/stall.wav</path>

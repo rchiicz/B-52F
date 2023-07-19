@@ -551,12 +551,26 @@ B-52F set file.
     </refuel>
   </systems>
   
+  <limits>
+    <!-- overspeed at Vmo (indicated airspeed knots) or Mmo (mach number) -->
+    <vmo>390</vmo>
+    <mmo>0.88</mmo>
+    
+    <!-- flaps and gear limits set just above what "autoland" script uses to deploy -->
+    <max-gear-extension-speed>175</max-gear-extension-speed>
+    <max-flap-extension-speed>
+     <flaps>0.01</flaps>
+     <speed>225</speed>
+    </max-flap-extension-speed>
+  </limits>
+  
   <nasal>
     <B52F>
       <file>Aircraft/B-52F/Nasal/B-52F.nas</file>
+      <file>Aircraft/B-52F/Nasal/limits.nas</file>
       <file>Aircraft/B-52F/Nasal/tyresmoke.nas</file>
-	  <file>Aircraft/B-52F/Nasal/doors.nas</file>
-	  <file>Aircraft/B-52F/Nasal/lights.nas</file>
+	    <file>Aircraft/B-52F/Nasal/doors.nas</file>
+	    <file>Aircraft/B-52F/Nasal/lights.nas</file>
       <script>start_up();</script>
     </B52F>
 	<aar>
