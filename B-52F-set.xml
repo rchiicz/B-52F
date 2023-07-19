@@ -34,7 +34,7 @@ B-52F set file.
     </maintainers >
     
     <aero>B-52F-yasim</aero>
-    <fuel-fraction>1.0</fuel-fraction>
+    <fuel-fraction>0.75</fuel-fraction>
 
     <tags>
         <tag>bomber</tag>
