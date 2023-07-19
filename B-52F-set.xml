@@ -46,6 +46,11 @@ B-52F set file.
     
     <description>Boeing B-52 F in Arclight colour scheme</description>
 
+    <!-- selectable starting states -->
+    <state n="0" include="States/take-off-overlay.xml"/>
+    <state n="1" include="States/cruise-overlay.xml"/>
+    <state n="2" include="States/approach-overlay.xml"/>
+
     <chase-distance-m type="double" archive="y">-70.0</chase-distance-m>
 
     <view n="0">

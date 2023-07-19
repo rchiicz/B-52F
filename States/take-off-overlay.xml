@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<PropertyList>
+  <name type="string">take-off</name>
+  <readable-name type="string">Take Off</readable-name>
+  <description type="string">On the runway, ready for take off.</description>
+
+  <overlay>
+
+  </overlay>
+</PropertyList>

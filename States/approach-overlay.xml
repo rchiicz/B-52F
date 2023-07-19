@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<PropertyList>
+  <name type="string">approach</name>
+  <readable-name type="string">Approach</readable-name>
+  <description type="string">
+    Start in the air: 250 kias
+    Autopilot Settings: Speed 250 kias, Vertical Speed 0, Wing Leveler on
+    Ready to intercept localizer/gs or try the IL auto-pilot mode...
+    NOTE: Use launcher approach settings or --altitude to choose desired altitude.
+  </description>
+
+  <overlay>
+    <autopilot>
+      <settings>
+        <target-speed-kt type="float">250</target-speed-kt>
+        <target-climb-rate-fps type="double">0</target-climb-rate-fps>
+        <target-roll-deg>0.0</target-roll-deg>
+      </settings>
+
+      <locks>
+        <speed>speed-with-throttle</speed>
+        <altitude type="string">vertical-speed-hold</altitude>
+        <heading>wing-leveler</heading>
+      </locks>
+    </autopilot>
+
+    <controls>
+      <gear>
+        <brake-parking type="double">0</brake-parking>
+        <gear-down type="bool">false</gear-down>
+      </gear>
+      <flight>
+        <flaps type="double">0</flaps>
+      </flight>
+    </controls>
+
+    <sim>
+      <presets>
+        <airspeed-kt type="double">250</airspeed-kt>
+      </presets>
+    </sim>
+    
+  </overlay>
+</PropertyList>

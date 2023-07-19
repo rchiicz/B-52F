@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<PropertyList>
+  <name type="string">cruise</name>
+  <readable-name type="string">Cruise</readable-name>
+  <description type="string">
+    Start in the air: 40000 ft, 240 kias (442 kts tas)
+    Autopilot Settings: Altitude Lock, Mach speed 0.77, Wing Leveler on
+    (If you launch with a different altitude or speed, be prepared to adjust the A/P)
+  </description>
+
+  <overlay>
+    <autopilot>
+      <settings>
+        <target-speed-mach type="float">0.77</target-speed-mach>
+        <target-altitude-ft type="double">40000</target-altitude-ft>
+        <target-roll-deg>0.0</target-roll-deg>
+      </settings>
+
+      <locks>
+        <altitude type="string">altitude-hold</altitude>
+        <speed>mach-with-throttle</speed>
+        <heading>wing-leveler</heading>
+      </locks>
+    </autopilot>
+
+    <controls>
+      <gear>
+        <brake-parking type="double">0</brake-parking>
+        <gear-down type="bool">false</gear-down>
+      </gear>
+      <flight>
+        <flaps type="double">0</flaps>
+      </flight>
+    </controls>
+
+    <sim>
+      <presets>
+        <airspeed-kt type="double">240</airspeed-kt>
+        <altitude-ft type="double">40000</altitude-ft>
+      </presets>
+    </sim>
+    
+  </overlay>
+</PropertyList>
