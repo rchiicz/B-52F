@@ -147,6 +147,7 @@ var atl_initiation = func {
   var flpextaoa = getprop("/autopilot/settings/flap-extend-aoa-deg");
   var weight =    getprop("/yasim/gross-weight-lbs");
 
+  setprop("/autopilot/internal/aoa-with-speed-min-kts", 170.0);
   setprop("/autopilot/internal/atl-weight-lbs", weight);
   setprop("/autopilot/locks/speed", "speed-with-throttle");
   setprop("/autopilot/settings/target-aoa-deg", (flpextaoa + 0.2));
@@ -211,9 +212,11 @@ var atl_spddep = func {
     }
   }
 
-  if(flppos < 0.999) {
+  # higher aoa until flaps deployed, then glide target aoa is set
+  if(flppos < 0.5) {
     setprop("/autopilot/settings/target-aoa-deg", (flpmxa + 1));
   } else {
+    setprop("/autopilot/internal/aoa-with-speed-min-kts", 115.0);
     interpolate("/autopilot/settings/target-aoa-deg", appaoa, 10);
   }
 
@@ -269,13 +272,12 @@ var atl_aoa = func {
 }
 #--------------------------------------------------------------------
 var atl_touchdown = func {
-  # Touch Down phase.
+  # Touch Down phase
   var agl =  getprop("/position/gear-agl-ft");
   var vfps = getprop("/velocities/vertical-speed-fps");
 
-  if(agl < 1) {
-    setprop("/controls/gear/brake-left", 0.1);
-    setprop("/controls/gear/brake-right", 0.1);
+  if (agl < 2) {
+    # touch down
     setprop("/autopilot/settings/steering-heading-deg", -999.9);
     setprop("/autopilot/locks/auto-landing", "disabled");
     setprop("/autopilot/locks/auto-take-off", "enabled");
@@ -283,67 +285,47 @@ var atl_touchdown = func {
     setprop("/autopilot/locks/heading", "");
     setprop("/autopilot/settings/target-climb-rate-fps", 0);
     interpolate("/controls/flight/elevator-trim", 0, 10.0);
+    setprop("/controls/flight/spoilers", 1);
   } else {
+    # last 400 feet, manual heading now
     setprop("/autopilot/locks/heading", "");
-    if(agl < 2) {
-      setprop("/controls/flight/spoilers", 1);
-    }
-  }
-  if(agl < 4) {
-#    setprop("/autopilot/locks/aoa", "");
-#    setprop("/autopilot/locks/speed", "Off");
-#    setprop("/controls/engines/engine[0]/throttle", 0);
-#    setprop("/controls/engines/engine[1]/throttle", 0);
-#    setprop("/controls/engines/engine[2]/throttle", 0);
-#    setprop("/controls/engines/engine[3]/throttle", 0);
-#    setprop("/controls/engines/engine[4]/throttle", 0);
-#    setprop("/controls/engines/engine[5]/throttle", 0);
-#    setprop("/controls/engines/engine[6]/throttle", 0);
-#    setprop("/controls/engines/engine[7]/throttle", 0);
-  } else {
-    if(agl < 10) {
-      if(vfps < -2) {
-        setprop("/autopilot/settings/target-climb-rate-fps", -2);
+    
+    # round out to avoid excessive pitch or vfps at touchdown
+    if (agl < 10) {
+      if (vfps < 0) {
+        setprop("/autopilot/settings/target-climb-rate-fps", 0);
       }
-    } else {
-      if(agl < 20) {
-        if(vfps < -4) {
-          setprop("/autopilot/settings/target-climb-rate-fps", -4);
-        }
-      } else {
-        if(agl < 40) {
-          setprop("/autopilot/locks/aoa", "");
-          setprop("/autopilot/locks/speed", "Off");
-          setprop("/controls/engines/engine[0]/throttle", 0);
-          setprop("/controls/engines/engine[1]/throttle", 0);
-          setprop("/controls/engines/engine[2]/throttle", 0);
-          setprop("/controls/engines/engine[3]/throttle", 0);
-          setprop("/controls/engines/engine[4]/throttle", 0);
-          setprop("/controls/engines/engine[5]/throttle", 0);
-          setprop("/controls/engines/engine[6]/throttle", 0);
-          setprop("/controls/engines/engine[7]/throttle", 0);
-          if(vfps < -6) {
-            setprop("/autopilot/settings/target-climb-rate-fps", -6);
-          }
-        } else {
-          if(agl < 80) {
-            if(vfps < -10) {
-              setprop("/autopilot/settings/target-climb-rate-fps", -10);
-            }
-          } else {
-            if(agl < 160) {
-              if(vfps < -10) {
-#                setprop("/autopilot/settings/target-climb-rate-fps", -10);
-              }
-            } else {
-              if(agl < 320) {
-                if(vfps < -12) {
-#                  setprop("/autopilot/settings/target-climb-rate-fps", -12);
-                }
-              }
-            }
-          }
-        }
+    } else if (agl < 30) {
+      if (vfps < 0) {
+        setprop("/autopilot/settings/target-climb-rate-fps", 0);
+      }
+    } else if (agl < 40) {
+      setprop("/autopilot/locks/speed", "Off");
+      setprop("/controls/engines/engine[0]/throttle", 0);
+      setprop("/controls/engines/engine[1]/throttle", 0);
+      setprop("/controls/engines/engine[2]/throttle", 0);
+      setprop("/controls/engines/engine[3]/throttle", 0);
+      setprop("/controls/engines/engine[4]/throttle", 0);
+      setprop("/controls/engines/engine[5]/throttle", 0);
+      setprop("/controls/engines/engine[6]/throttle", 0);
+      setprop("/controls/engines/engine[7]/throttle", 0);
+
+      # start using vfps to attempt "rounding" before touch down
+      setprop("/autopilot/locks/aoa", "");
+      if (vfps < -1) {
+        setprop("/autopilot/settings/target-climb-rate-fps", -1);
+      }
+    } else if (agl < 80) {
+      if (vfps < -7) {
+        setprop("/autopilot/settings/target-climb-rate-fps", -7);
+      }
+    } else if (agl < 160) {
+      if (vfps < -10) {
+        setprop("/autopilot/settings/target-climb-rate-fps", -10);
+      }
+    } else if (agl < 320) {
+      if (vfps < -12) {
+        setprop("/autopilot/settings/target-climb-rate-fps", -12);
       }
     }
   }

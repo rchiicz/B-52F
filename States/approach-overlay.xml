@@ -38,6 +38,7 @@
       <presets>
         <airspeed-kt type="double">250</airspeed-kt>
       </presets>
+      <fuel-fraction>0.30</fuel-fraction>
     </sim>
     
   </overlay>

@@ -67,6 +67,7 @@
     <input>/instrumentation/nav[0]/gs-rate-of-climb</input>
     <output>/autopilot/internal/gs-rate-of-climb-filtered[0]</output>
     <max-rate-of-change>10.0</max-rate-of-change>
+    <initialize-to>output</initialize-to>
   </filter>
 
   <filter>
@@ -928,7 +929,7 @@
                           <!-- unfiltered derivative error -->
       <Ti>10.0</Ti>        <!-- integrator time -->
       <Td>0.4</Td>    <!-- derivator time -->
-      <u_min>90.0</u_min> <!-- minimum output clamp -->
+      <u_min><property>/autopilot/internal/aoa-with-speed-min-kts</property></u_min> <!-- avoid under-speed during IL approach -->
       <u_max>210.0</u_max>  <!-- maximum output clamp -->
     </config>
    </pid-controller>

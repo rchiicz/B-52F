@@ -321,7 +321,8 @@ true heading-hold.
 
 IL Mode
 -------
-The IL (automatic instrument landing) mode will attempt to get the
+The IL (automatic instrument landing) mode is enabled to select after
+clicking the AH (Altitude Hold) enable.  It will attempt to get the
 a/c on the nav1 ILS heading & then follow it, configure the a/c for
 landing and get it on to the glideslope, follow the glide-slope down
 and perform a landing.  Both the front and rear landing gear will be 
