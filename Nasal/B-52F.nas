@@ -5,10 +5,40 @@ var start_up = func {
   settimer(steering_instrument_update, 5);
   settimer(yaw_steering, 5);
   
+  setlistener("/autopilot/locks/speed", speed_lock_monitor);
   setlistener("/autopilot/locks/altitude", pitch_hold_monitor);
   setlistener("/instrumentation/terrain-radar/hi-elev/alt-ft", tfa_high_alt_monitor);
   var dialog = gui.Dialog.new("/sim/gui/dialogs/B-52F/TFA-popup/dialog",
                "Aircraft/B-52F/Dialogs/TFA-popup.xml");
+}
+#--------------------------------------------------------------------
+# Monitor to reset throttle to joystick axis value when the
+# speed lock is disengaged.
+# Assumes joystick axis is mapped to: /controls/engines/throttle-all
+# Works well enough for keyboard-only binding as well.
+#--------------------------------------------------------------------
+var speed_lock_monitor = func(n) {
+  var speed_lock = n.getValue();
+  var setting = getprop("/controls/engines/throttle-all");
+  
+  if (speed_lock) {
+    screen.log.write("A/P Speed Lock: "~speed_lock);
+  } else {
+    screen.log.write("A/P Speed Lock: off");
+  }
+  
+  # if disengage OR default a/p dialog "speed with pitch" is set
+  if (speed_lock == "" or speed_lock == "speed-with-pitch-trim") {
+    var throttle = setting * -0.5 + 0.5;
+    setprop("/controls/engines/engine[0]/throttle", throttle);
+    setprop("/controls/engines/engine[1]/throttle", throttle);
+    setprop("/controls/engines/engine[2]/throttle", throttle);
+    setprop("/controls/engines/engine[3]/throttle", throttle);
+    setprop("/controls/engines/engine[4]/throttle", throttle);
+    setprop("/controls/engines/engine[5]/throttle", throttle);
+    setprop("/controls/engines/engine[6]/throttle", throttle);
+    setprop("/controls/engines/engine[7]/throttle", throttle);
+  }
 }
 #--------------------------------------------------------------------
 var autotakeoff = func {

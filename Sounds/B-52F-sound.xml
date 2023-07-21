@@ -599,7 +599,10 @@
       <path>Sounds/overspeed.wav</path>
       <mode>looped</mode>
       <condition>
-        <property>/surface-positions/flap-pos-norm</property>
+        <greater-than>
+          <property n="0">/surface-positions/flap-pos-norm</property>
+          <property n="1">/limits/max-flap-extension-speed[0]/flaps</property>
+        </greater-than>
         <greater-than>
           <property n="0">/velocities/airspeed-kt</property>
           <property n="1">/limits/max-flap-extension-speed[0]/speed</property>

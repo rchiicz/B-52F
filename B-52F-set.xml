@@ -153,10 +153,10 @@ B-52F set file.
     </sound>
 
     <panel>
-      <path>Aircraft/B-52F/Panels/B-52F-vfr-panel.xml</path>
+      <path>Aircraft/B-52F/Panels/B-52F-mini-panel.xml</path>
     </panel>
     <panel_2>
-      <path>Aircraft/B-52F/Panels/B-52F-mini-panel.xml</path>
+      <path>Aircraft/B-52F/Panels/B-52F-vfr-panel.xml</path>
     </panel_2>
 
     <hud>
@@ -570,7 +570,7 @@ B-52F set file.
     <!-- flaps and gear limits set just above what "autoland" script uses to deploy -->
     <max-gear-extension-speed>175</max-gear-extension-speed>
     <max-flap-extension-speed>
-     <flaps>0.01</flaps>
+     <flaps>0.25</flaps>
      <speed>225</speed>
     </max-flap-extension-speed>
   </limits>

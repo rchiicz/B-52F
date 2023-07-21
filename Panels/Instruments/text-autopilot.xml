@@ -723,6 +723,16 @@
       </binding>
       <binding>
         <command>property-assign</command>
+        <property>/autopilot/settings/steering-heading-deg</property>
+        <value type="float">-999.9</value>
+      </binding>
+      <binding>
+        <command>property-assign</command>
+        <property>/controls/engines/engine[0]/afterburner</property>
+        <value type="float">0.0</value>
+      </binding>
+      <binding>
+        <command>property-assign</command>
         <property>/autopilot/locks/auto-landing</property>
         <value type="string">disabled</value>
       </binding>

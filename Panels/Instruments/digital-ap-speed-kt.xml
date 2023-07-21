@@ -645,9 +645,10 @@
    <w>14</w>
    <h>19</h>
    <binding>
-    <command>property-assign</command>
-    <property>autopilot/locks/speed</property>
-    <value type="string">speed-with-throttle</value>
+     <command>property-cycle</command>
+     <property>autopilot/locks/speed</property>
+     <value type="string"></value>
+     <value type="string">speed-with-throttle</value>
    </binding>
   </action>
 
@@ -659,9 +660,10 @@
    <w>14</w>
    <h>19</h>
    <binding>
-    <command>property-assign</command>
-    <property>autopilot/locks/speed</property>
-    <value type="string">mach-with-throttle</value>
+     <command>property-cycle</command>
+     <property>autopilot/locks/speed</property>
+     <value type="string"></value>
+     <value type="string">mach-with-throttle</value>
    </binding>
   </action>
 
