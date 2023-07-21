@@ -209,7 +209,7 @@ B-52F set file.
       <title>Boeing B-52 F</title>
       <key>
         <name>Ctrl-z/Ctrl-\ or Ctrl-y</name>
-        <desc>Steer Right/Left</desc>
+        <desc>Crab Steering Right/Left</desc>
       </key>
       <key>
         <name>Shift-D</name>
@@ -235,20 +235,23 @@ B-52F set file.
       <line> AH - Altitude hold</line>
       <line> TF - Terrain follow/AGL hold</line>
       <line> TO - Auto take-off</line>
-      <line> IL - ILS/Auto landing</line>
+      <line> IL - ILS/Auto landing (enabled after clicking AH mode on)</line>
       <line> MC - Mach Climb</line>
       <line></line>
       <line>Click on AP Mode to turn off all A/P locks.</line>
       <line></line>
-      <line>The 2D VFR panel is just a place-holder for the radio instruments</line>
-      <line> - use the 2D mini-panel to control the aircraft (Shift-s)</line>
+      <line>The 2D VFR panel (Shift-P) is just a place-holder for the radio instruments</line>
+      <line> - use the 2D mini-panel to control the aircraft (Shift-S).</line>
       <line></line>
       <line>Set the Altitude hold and TF/AGL settings via the autopilot menu.</line>
-      <line>If an AP Mode is grayed out it is not available</line>
+      <line>If an AP Mode is grayed out it is not available.</line>
       <line></line>
       <line>Use the yaw display to align the landing main gear in cross-wind</line>
-      <line>landings - the rear gear will center itself once the speed is</line>
-      <line>below the transition speed for normal steering</line>
+      <line>landings - the gear will center itself once the speed is</line>
+      <line>below the transition speed for normal steering.</line>
+      <line></line>
+      <line>Crosswind crab take-off is also possible. Set crab angle and then</line>
+      <line>use normal rudder controls (keys or pedals) to steer during take off roll.</line>
       <line></line>
       <line>To use Mach-Climb mode click on the light blue M in the speed</line>
       <line>instrument to select mach-hold mode, set the required mach</line>

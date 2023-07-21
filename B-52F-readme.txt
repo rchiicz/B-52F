@@ -218,12 +218,17 @@ this should be bourne in mind when flying the Buff.
 applies to the 'F' model)
 
 Both the front and rear main landing gear are steerable on the B-52 to 
-allow for cross-wind landings with the quadracycle layout.  The front
-gear steering is controlled via the keyboard (Ctrl-\ & Ctrl-z = Left/Right)
-but the rear gear is controlled by a Nasal script, which is started
+allow for cross-wind take-off and landing with the quadracycle layout.
+The crab steering is controlled via the keyboard (Ctrl-\ & Ctrl-z = Left/Right)
+and the rear gear is controlled by a Nasal script, which is started
 automatically.  While in the air, the script aligns the rear wheels for any
 yaw present and then on touch-down the wheels are brought into alignment
-with the fuselage, taking fifteen seconds to do so.
+with the fuselage, taking fifteen seconds to do so.  Normal rudder controls
+(keys or pedals) can be used to keep on the runway during the transition.
+
+Crab take-off is possible by setting the crab angle on the runway, and then
+use normal rudder controls (keys or pedals) to align down the runway during
+the take off roll.
 
 
 Keyboard mapping
@@ -232,8 +237,8 @@ The following additional/non-standard keyboard mappings are set up
 for this aircraft
 
 Key               Action
-'Ctrl-\'          Steer Left
-'Ctrl-z'          Steer Right
+'Ctrl-\'          Crab Steer Left
+'Ctrl-z'          Crab Steer Right
 'K' (Shift-k)     Toggle trajactory markers on & off
 'U' (Shift-u)     Update the drop-view location.
 'D' (Shift-d)     Parachute (5 seconds to impact)
