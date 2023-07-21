@@ -3,7 +3,8 @@ var start_up = func {
   settimer(initialise_drop_view_pos, 5);
   settimer(yaw_monitor, 5);
   settimer(steering_instrument_update, 5);
-  setlistener("/controls/gear/steering-front-norm", yaw_steering);
+  settimer(yaw_steering, 5);
+  
   setlistener("/autopilot/locks/altitude", pitch_hold_monitor);
   setlistener("/instrumentation/terrain-radar/hi-elev/alt-ft", tfa_high_alt_monitor);
   var dialog = gui.Dialog.new("/sim/gui/dialogs/B-52F/TFA-popup/dialog",
@@ -287,9 +288,7 @@ var atl_touchdown = func {
     interpolate("/controls/flight/elevator-trim", 0, 10.0);
     setprop("/controls/flight/spoilers", 1);
   } else {
-    # last 400 feet, manual heading now
-    setprop("/autopilot/locks/heading", "");
-    
+    # last 400 feet AGL...
     # round out to avoid excessive pitch or vfps at touchdown
     if (agl < 10) {
       if (vfps < 0) {
@@ -300,6 +299,7 @@ var atl_touchdown = func {
         setprop("/autopilot/settings/target-climb-rate-fps", 0);
       }
     } else if (agl < 40) {
+      # engines off
       setprop("/autopilot/locks/speed", "Off");
       setprop("/controls/engines/engine[0]/throttle", 0);
       setprop("/controls/engines/engine[1]/throttle", 0);
@@ -320,6 +320,9 @@ var atl_touchdown = func {
         setprop("/autopilot/settings/target-climb-rate-fps", -7);
       }
     } else if (agl < 160) {
+      # manual heading control
+      setprop("/autopilot/locks/heading", "");
+
       if (vfps < -10) {
         setprop("/autopilot/settings/target-climb-rate-fps", -10);
       }
@@ -348,38 +351,60 @@ var steering_instrument_update = func {
   settimer(steering_instrument_update, 0.25);
 }
 #--------------------------------------------------------------------
-var yaw_steering = func(n) {
-  # This listener function monitors front gear steering inputs and copies them
+var yaw_steering = func {
+  # This function monitors front gear steering inputs and copies them
   # to the rear gear for cross wind landings.
-  # Once the speed has dropped below steering-yaw-transition-kt the rear gear
-  # is interpolated to center over steering-yaw-transition-sec seconds so that
+  # Once the speed has dropped below steering-yaw-transition-kt both gear are
+  # interpolated to center over steering-yaw-transition-sec seconds so that
   # the aircraft can then be steered normally.
 
-  var str_f_norm = n.getValue();
+  var gear_down =  (getprop("/gear/gear[0]/position-norm") == 1);
+  var wow =        getprop("/gear/gear[0]/wow");
+  var spd =        getprop("/velocities/airspeed-kt");
+  var str_f_norm = props.globals.getNode("/controls/gear/steering-front-norm", 1);
   var str_r_norm = props.globals.getNode("/controls/gear/steering-rear-norm", 1);
-  var str_r_lock = props.globals.getNode("/autopilot/locks/steering-rear", 1);
+  var state =      props.globals.getNode("/autopilot/internal/steering-state", 1);
   var str_t_kt =   props.globals.getNode("/autopilot/settings/steering-yaw-transition-kt", 1);
   var str_t_sec =  props.globals.getNode("/autopilot/settings/steering-yaw-transition-sec", 1);
-  var spd =        props.globals.getNode("/velocities/airspeed-kt", 1);
 
-  # Set the appropriate lock states.
-  if(spd.getValue() > str_t_kt.getValue()) {
-    str_r_lock.setValue("linked");
-  } else {
-    if(str_r_lock.getValue() != "locked") {
-      str_r_lock.setValue("transition");
+  # different states for take-off vs landing modes
+  if (state.getValue() == "initialised") {
+    if (gear_down and wow) {
+      state.setValue("take-off-linked");
+    } else if (gear_down and !wow) {
+      state.setValue("landing-linked");
     }
-  }
-
-  # Set the rear steering.
-  if(str_r_lock.getValue() == "linked") {
-    str_r_norm.setValue(str_f_norm);
-  } else {
-    if(str_r_lock.getValue() == "transition") {
-      str_r_lock.setValue("locked");
+  } else if (state.getValue() == "take-off-linked") {
+    if (gear_down) {
+      # sync rear with front
+      str_r_norm.setValue(str_f_norm.getValue());
+    } else {
+      # take-off complete, return to zeros
+      interpolate(str_f_norm, 0, str_t_sec.getValue());
       interpolate(str_r_norm, 0, str_t_sec.getValue());
+      state.setValue("transition");
     }
+  } else if (state.getValue() == "landing-linked") {
+    if (gear_down and spd > str_t_kt.getValue()) {
+      # sync rear with front
+      str_r_norm.setValue(str_f_norm.getValue());
+    } else {
+      # landing complete, return to zeros
+      interpolate(str_f_norm, 0, str_t_sec.getValue());
+      interpolate(str_r_norm, 0, str_t_sec.getValue());
+      state.setValue("transition");
+    }
+  } else if (state.getValue() == "transition") {
+    # stay in transition until both front/rear have returned to zero
+    if (str_f_norm.getValue() == 0 and str_r_norm.getValue() == 0) {
+      state.setValue("initialised");
+    }
+  } else {
+    # should never happen
   }
+  
+  # Schedule the next loop
+  settimer(yaw_steering, 0.1);
 }
 #--------------------------------------------------------------------
 var toggle_traj_mkr = func {

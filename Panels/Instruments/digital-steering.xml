@@ -30,6 +30,7 @@
    </transformations>
   </layer>
 
+  <!-- no mode -->
   <layer>
    <name>Title</name>
    <type>text</type>
@@ -38,6 +39,108 @@
     <red>0.8</red>
     <green>0.8</green>
     <blue>0.8</blue>
+   </color>
+   <chunks>
+    <chunk>
+     <type>literal</type>
+     <text>Steering</text>
+    </chunk>
+   </chunks>
+   <transformations>
+    <transformation>
+     <type>x-shift</type>
+     <offset>-46</offset>
+    </transformation>
+    <transformation>
+     <type>y-shift</type>
+     <offset>10</offset>
+    </transformation>
+   </transformations>
+  </layer>
+
+  <!-- take-off crab mode -->
+  <layer>
+   <condition>
+      <equals>
+        <property>/autopilot/internal/steering-state</property>
+        <value type="string">take-off-linked</value>
+      </equals>
+   </condition>
+   <name>Title Green</name>
+   <type>text</type>
+   <point-size>12</point-size>
+   <color>
+    <red>0.2</red>
+    <green>0.8</green>
+    <blue>0.2</blue>
+   </color>
+   <chunks>
+    <chunk>
+     <type>literal</type>
+     <text>Steering</text>
+    </chunk>
+   </chunks>
+   <transformations>
+    <transformation>
+     <type>x-shift</type>
+     <offset>-46</offset>
+    </transformation>
+    <transformation>
+     <type>y-shift</type>
+     <offset>10</offset>
+    </transformation>
+   </transformations>
+  </layer>
+
+  <!-- landing crab mode -->
+  <layer>
+   <condition>
+      <equals>
+        <property>/autopilot/internal/steering-state</property>
+        <value type="string">landing-linked</value>
+      </equals>
+   </condition>
+   <name>Title Red</name>
+   <type>text</type>
+   <point-size>12</point-size>
+   <color>
+    <red>0.8</red>
+    <green>0.2</green>
+    <blue>0.2</blue>
+   </color>
+   <chunks>
+    <chunk>
+     <type>literal</type>
+     <text>Steering</text>
+    </chunk>
+   </chunks>
+   <transformations>
+    <transformation>
+     <type>x-shift</type>
+     <offset>-46</offset>
+    </transformation>
+    <transformation>
+     <type>y-shift</type>
+     <offset>10</offset>
+    </transformation>
+   </transformations>
+  </layer>
+
+  <!-- transitioning mode -->
+  <layer>
+   <condition>
+      <equals>
+        <property>/autopilot/internal/steering-state</property>
+        <value type="string">transition</value>
+      </equals>
+   </condition>
+   <name>Title Yellow</name>
+   <type>text</type>
+   <point-size>12</point-size>
+   <color>
+    <red>0.8</red>
+    <green>0.8</green>
+    <blue>0.2</blue>
    </color>
    <chunks>
     <chunk>

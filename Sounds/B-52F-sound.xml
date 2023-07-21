@@ -614,10 +614,11 @@
     <stall>
       <name>stall</name>
       <path>Sounds/stall.wav</path>
+      <mode>looped</mode>
       <condition>
         <greater-than>
           <property>/velocities/airspeed-kt</property>
-          <value>80.0</value>
+          <value>40</value>
         </greater-than>
         <greater-than>
           <property>/orientation/alpha-deg</property>

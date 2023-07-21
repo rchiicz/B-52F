@@ -842,12 +842,21 @@
   </pid-controller>
 
 <!-- Simple Ground Roll Rudder Heading Hold -->
+<!-- NOTE: disabled if take-off crab steering is set (use rudder controls manually) -->
   <pid-controller>
     <name>Ground Roll Rudder hold</name>
     <debug>false</debug>
     <enable>
-      <prop>/autopilot/locks/rudder-control</prop>
-      <value>rudder-hold</value>
+      <condition>
+        <equals>
+          <property>/autopilot/locks/rudder-control</property>
+          <value>rudder-hold</value>
+        </equals>
+        <equals>
+          <property>/controls/gear/steering-rear-norm</property>
+          <value>0.0</value>
+        </equals>
+      </condition>
     </enable>
     <input>
       <prop>/orientation/heading-deg</prop>
@@ -873,12 +882,21 @@
    </pid-controller>
 
 <!-- Simple Ground Roll Steering Heading Hold -->
+<!-- NOTE: disabled if take-off crab steering is set (use rudder controls manually) -->
   <pid-controller>
     <name>Ground Roll Steering hold</name>
     <debug>false</debug>
     <enable>
-      <prop>/autopilot/locks/steering-front</prop>
-      <value>ground-roll</value>
+      <condition>
+        <equals>
+          <property>/autopilot/locks/steering-front</property>
+          <value>ground-roll</value>
+        </equals>
+        <equals>
+          <property>/controls/gear/steering-rear-norm</property>
+          <value>0.0</value>
+        </equals>
+      </condition>
     </enable>
     <input>
       <prop>/instrumentation/gps/indicated-track-true-deg</prop>
