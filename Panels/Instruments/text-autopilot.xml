@@ -331,10 +331,16 @@
 <!-- AP Activated -->
     <layer>
       <condition>
-        <not-equals>
-          <property>/autopilot/locks/altitude</property>
-          <value></value>
-        </not-equals>
+        <or>
+          <not-equals>
+            <property>/autopilot/locks/altitude</property>
+            <value></value>
+          </not-equals>
+          <not-equals>
+            <property>/autopilot/locks/speed</property>
+            <value></value>
+          </not-equals>
+        </or>
       </condition>
       <name>Title</name>
       <type>text</type>
@@ -724,6 +730,11 @@
         <command>property-assign</command>
         <property>/autopilot/locks/aoa</property>
         <value type="string">disabled</value>
+      </binding>
+      <binding>
+        <command>property-assign</command>
+        <property>/autopilot/locks/speed</property>
+        <value type="string"></value>
       </binding>
     </action>
 
