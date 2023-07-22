@@ -6,10 +6,33 @@ var start_up = func {
   settimer(yaw_steering, 5);
   
   setlistener("/autopilot/locks/speed", speed_lock_monitor);
+  setlistener("/instrumentation/nav/nav-loc", il_enable_monitor);
+  setlistener("/instrumentation/nav/in-range", il_enable_monitor);
   setlistener("/autopilot/locks/altitude", pitch_hold_monitor);
   setlistener("/instrumentation/terrain-radar/hi-elev/alt-ft", tfa_high_alt_monitor);
   var dialog = gui.Dialog.new("/sim/gui/dialogs/B-52F/TFA-popup/dialog",
                "Aircraft/B-52F/Dialogs/TFA-popup.xml");
+}
+#--------------------------------------------------------------------
+# Monitor to enable/disable the IL autopilot mode based on available
+# localizer (in range) on NAV1 radio.
+#
+# If 'engaged', do NOT make changes here that will interfere with the
+# landing scripts.  E.g. nav signal may go away when crossing threshold,
+# but the auto landing scripts need to keep running.
+#--------------------------------------------------------------------
+var il_enable_monitor = func(n) {
+  var nav_loc = getprop("/instrumentation/nav/nav-loc");
+  var in_range = getprop("/instrumentation/nav/in-range");
+  var cur_state = getprop("/autopilot/locks/auto-landing");
+  
+  if (cur_state != "engaged") {
+    if (nav_loc and in_range) {
+      setprop("/autopilot/locks/auto-landing", "enabled");
+    } else {
+      setprop("/autopilot/locks/auto-landing", "disabled");
+    }
+  }
 }
 #--------------------------------------------------------------------
 # Monitor to reset throttle to joystick axis value when the
@@ -182,7 +205,7 @@ var ato_spddep = func {
 }
 #--------------------------------------------------------------------
 var autoland = func {
-  if(getprop("/autopilot/locks/auto-landing") == "enabled") {
+  if (getprop("/autopilot/locks/auto-landing") == "enabled") {
     setprop("/autopilot/locks/auto-landing", "engaged");
     atl_initiation();
   }
@@ -239,7 +262,6 @@ var atl_spddep = func {
   var grmxextspdkt =   getprop("/autopilot/settings/gear-extend-max-speed-kt");
   var flpmxa =         getprop("/autopilot/settings/flap-extend-aoa-deg");
   var flppos =         getprop("/surface-positions/flap-pos-norm");
-  var spdhold =        getprop("/autopilot/locks/speed");
   var tgtaskts =       getprop("/autopilot/settings/target-speed-kt");
 
   if(curraskts > (tgtaskts + 10)) {
@@ -344,17 +366,18 @@ var atl_touchdown = func {
         setprop("/autopilot/settings/target-climb-rate-fps", 0);
       }
     } else if (agl < 40) {
-      # engines off
-      setprop("/autopilot/locks/speed", "Off");
-      setprop("/controls/engines/engine[0]/throttle", 0);
-      setprop("/controls/engines/engine[1]/throttle", 0);
-      setprop("/controls/engines/engine[2]/throttle", 0);
-      setprop("/controls/engines/engine[3]/throttle", 0);
-      setprop("/controls/engines/engine[4]/throttle", 0);
-      setprop("/controls/engines/engine[5]/throttle", 0);
-      setprop("/controls/engines/engine[6]/throttle", 0);
-      setprop("/controls/engines/engine[7]/throttle", 0);
-
+      if (getprop("/autopilot/locks/speed")) {
+        # engines off, unless pilot has already taken control
+        setprop("/autopilot/locks/speed", "");
+        setprop("/controls/engines/engine[0]/throttle", 0);
+        setprop("/controls/engines/engine[1]/throttle", 0);
+        setprop("/controls/engines/engine[2]/throttle", 0);
+        setprop("/controls/engines/engine[3]/throttle", 0);
+        setprop("/controls/engines/engine[4]/throttle", 0);
+        setprop("/controls/engines/engine[5]/throttle", 0);
+        setprop("/controls/engines/engine[6]/throttle", 0);
+        setprop("/controls/engines/engine[7]/throttle", 0);
+      }
       # start using vfps to attempt "rounding" before touch down
       setprop("/autopilot/locks/aoa", "");
       if (vfps < -1) {

@@ -270,6 +270,20 @@ B-52F set file.
         </TFA-popup>
       </dialogs>
     </gui>
+
+    <!-- save some settings between sessions -->
+    <aircraft-data>
+      <path>/instrumentation/comm[0]/frequencies/selected-mhz</path>
+      <path>/instrumentation/comm[0]/frequencies/standby-mhz</path>
+      <path>/instrumentation/comm[1]/frequencies/selected-mhz</path>
+      <path>/instrumentation/comm[1]/frequencies/standby-mhz</path>
+      <path>/instrumentation/nav[0]/frequencies/selected-mhz</path>
+      <path>/instrumentation/nav[0]/frequencies/standby-mhz</path>
+      <path>/instrumentation/nav[1]/frequencies/selected-mhz</path>
+      <path>/instrumentation/nav[1]/frequencies/standby-mhz</path>
+      <path>/instrumentation/adf[0]/frequencies/selected-khz</path>
+      <path>/instrumentation/adf[0]/frequencies/standby-khz</path>
+    </aircraft-data>
   </sim>
 
   <gear>
@@ -554,7 +568,16 @@ B-52F set file.
         <hi-elev-markers type="string">initialised</hi-elev-markers>
       </settings>
     </terrain-radar>
+
+    <!-- reload any saved settings for various instruments -->
+    <comm n="0" userarchive="y"></comm>
+    <comm n="1" userarchive="y"></comm>
+    <nav n="0" userarchive="y"></nav>
+    <nav n="1" userarchive="y"></nav>
+    <adf n="0" userarchive="y"></adf>
+
   </instrumentation>
+
   <!-- Refuel -->
    <systems>
     <refuel><type>boom</type>
