@@ -65,6 +65,11 @@ var ato_initiation = func {
           setprop("/autopilot/settings/target-roll-deg", 0);
           setprop("/autopilot/settings/target-speed-kt", 310);
           setprop("/autopilot/locks/altitude", "ground-roll");
+          
+          # rudder and steering will engage once we have started moving
+          setprop("/autopilot/locks/steering-front", "initialised");
+          setprop("/autopilot/locks/rudder-control", "initialised");
+          
           setprop("/autopilot/locks/speed", "speed-with-throttle");
           setprop("/autopilot/locks/heading", "wing-leveler");
           setprop("/autopilot/locks/take-off-phase", "take-off");
@@ -91,17 +96,20 @@ var ato_loop = func {
 }
 #--------------------------------------------------------------------
 var ato_mode = func {
+  var tophase = getprop("/autopilot/locks/take-off-phase");
+  var rdrctrl = getprop("/autopilot/locks/rudder-control");
   var agl =     getprop("/position/altitude-agl-ft");
-  if(agl > 50) {
-    var tophase = getprop("/autopilot/locks/take-off-phase");
-    if(tophase == "take-off") {
-      var coiptdeg = getprop("/autopilot/settings/climb-out-initial-pitch-deg");
-      setprop("/autopilot/locks/rudder-control", "reset");
-      setprop("/autopilot/locks/steering-front", "reset");
-      setprop("/controls/gear/gear-down", "false");
-      interpolate("/autopilot/settings/target-pitch-deg", coiptdeg, 4);
-      setprop("/autopilot/locks/take-off-phase", "climb-out");
-    }
+ 
+ if (agl > 200 and rdrctrl == "rudder-hold") {
+    # keep rudder control a bit longer than gear-up elevation
+    setprop("/autopilot/locks/rudder-control", "reset");
+  } else if (agl > 50 and tophase == "take-off") {
+    # positive climb, stop steering, retract gear
+    var coiptdeg = getprop("/autopilot/settings/climb-out-initial-pitch-deg");
+    setprop("/autopilot/locks/steering-front", "reset");
+    setprop("/controls/gear/gear-down", "false");
+    interpolate("/autopilot/settings/target-pitch-deg", coiptdeg, 4);
+    setprop("/autopilot/locks/take-off-phase", "climb-out");
   }
 }
 #--------------------------------------------------------------------
@@ -122,35 +130,42 @@ var ato_spddep = func {
   var airspeed = getprop("/velocities/airspeed-kt");
   var flpretkt = getprop("/autopilot/settings/flap-retract-speed-kt");
   var rdrctrl = getprop("/autopilot/locks/rudder-control");
-  if(airspeed < 40) {
+  var str_f_mode = getprop("/autopilot/locks/steering-front");
+
+  if (airspeed < 40) {
     # Do nothing until we're moving.
   } else {
-    if(airspeed < flpretkt) {
+    # engage steer and rudder now that we are moving, respond to 'reset' request and then disable
+    if (rdrctrl == "initialised") {
       setprop("/autopilot/locks/rudder-control", "rudder-hold");
+    } else if (rdrctrl == "reset" ) {
+      setprop("/autopilot/locks/rudder-control", "disabled");
+      # released rudder ctl, reset but don't take too long, manual rudder pedals may be needed soon!
+      interpolate("/controls/flight/rudder", 0, 3);
+    }
+    if (str_f_mode == "initialised") {
       setprop("/autopilot/locks/steering-front", "ground-roll");
+    } else if (str_f_mode == "reset" ) {
+      setprop("/autopilot/locks/steering-front", "disabled");
+      setprop("/controls/gear/steering-front-norm", 0);
+    }
+
+    if (airspeed < flpretkt) {
       setprop("/autopilot/locks/altitude", "take-off");
     } else {
-      if(airspeed < 260) {
-        if(rdrctrl != "") {
-          setprop("/autopilot/locks/rudder-control", "reset");
-          if(rdrctrl != "") {
-            setprop("/autopilot/locks/rudder-control", "");
-            interpolate("/controls/flight/rudder", 0, 10);
-          }
-        }
-        setprop("/autopilot/locks/steering-front", "");
-        setprop("/controls/gear/steering-front-norm", 0);
+      if (airspeed < 260) {
         setprop("/controls/flight/flaps", 0);
         var cofptdeg = getprop("/autopilot/settings/climb-out-final-pitch-deg");
         interpolate("/autopilot/settings/target-pitch-deg", cofptdeg, 8);
       } else {
-        if(getprop("surface-positions/left-flap-pos-norm") < 0.001) {
-          if(getprop("surface-positions/right-flap-pos-norm") < 0.001) {
+        if (getprop("surface-positions/left-flap-pos-norm") < 0.001) {
+          if (getprop("surface-positions/right-flap-pos-norm") < 0.001) {
             # Switch to true-heading-hold, Mach-Hold throttle
             # mode, mach-hold-climb mode and disable Take-Off mode.
             setprop("/autopilot/locks/heading", "true-heading-hold");
             setprop("/autopilot/locks/altitude", "altitude-hold");
             setprop("/autopilot/locks/auto-take-off", "disabled");
+            setprop("/autopilot/locks/take-off-phase", "initialised");
             setprop("/autopilot/locks/auto-landing", "enabled");
             setprop("/autopilot/settings/target-climb-rate-fps", 0);
           }
@@ -397,6 +412,9 @@ var yaw_steering = func {
   var str_t_kt =   props.globals.getNode("/autopilot/settings/steering-yaw-transition-kt", 1);
   var str_t_sec =  props.globals.getNode("/autopilot/settings/steering-yaw-transition-sec", 1);
 
+  # avoid interaction with TO (take off a/p mode)
+  var str_f_mode = getprop("/autopilot/locks/steering-front");
+  
   # different states for take-off vs landing modes
   if (state.getValue() == "initialised") {
     if (gear_down and wow) {
@@ -404,7 +422,7 @@ var yaw_steering = func {
     } else if (gear_down and !wow) {
       state.setValue("landing-linked");
     }
-  } else if (state.getValue() == "take-off-linked") {
+  } else if (state.getValue() == "take-off-linked" and str_f_mode != "ground-roll") {
     if (gear_down) {
       # sync rear with front
       str_r_norm.setValue(str_f_norm.getValue());
