@@ -214,7 +214,7 @@ Enhanced for FG Version 2020.3 by Ron Horn <rchiicz@gmail.com>
    <h>34</h>
   </instrument>
 
-  <instrument include="Aircraft/Instruments/hsi-hi.xml">
+  <instrument include="Instruments/hsi-hi.xml">
    <name>Horizontal Situation Indicator</name>
    <x>103</x>
    <y>35</y>

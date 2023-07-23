@@ -16,6 +16,7 @@ Started 24-7-01 by Timothy Gale
  <params>
   <nav-gs-needle-deflection>/instrumentation/nav[0]/gs-needle-deflection-norm</nav-gs-needle-deflection>
   <hsi-has-gs-needle>/sim/instrument-options/hsi[0]/has-gs-needle</hsi-has-gs-needle>
+  <hsi-gs-in-range>/instrumentation/nav[0]/gs-in-range</hsi-gs-in-range>
  </params>
 
  <layers>
@@ -117,9 +118,10 @@ Started 24-7-01 by Timothy Gale
   <name>glidescope needle</name>
   <condition>
    <equals>
-   <property alias="../../../../../params/hsi-has-gs-needle"/>
-   <value>1</value>
+     <property alias="../../../../../params/hsi-has-gs-needle"/>
+     <value>1</value>
    </equals>
+   <property alias="../../../../params/hsi-gs-in-range"/>
   </condition>
   <texture>
    <path>Aircraft/Instruments/Textures/misc-1.rgb</path>
