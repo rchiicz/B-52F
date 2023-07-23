@@ -195,72 +195,6 @@
       </transformations>
     </layer>
 
-    <layer>
-      <condition>
-        <equals>
-          <property>/autopilot/locks/auto-landing</property>
-          <value>disabled</value>
-        </equals>
-      </condition>
-      <name>Instrument Landing - disabled</name>
-      <type>text</type>
-      <point-size>14</point-size>
-      <color>
-        <red>0.8</red>
-        <green>0.8</green>
-        <blue>0.8</blue>
-      </color>
-      <chunks>
-        <chunk>
-          <type>literal</type>
-          <text>IL</text>
-        </chunk>
-      </chunks>
-      <transformations>
-        <transformation>
-          <type>x-shift</type>
-          <offset>63</offset>
-        </transformation>
-        <transformation>
-          <type>y-shift</type>
-          <offset>-8</offset>
-        </transformation>
-      </transformations>
-    </layer>
-
-    <layer>
-      <condition>
-        <equals>
-          <property>/autopilot/locks/auto-landing</property>
-          <value>enabled</value>
-        </equals>
-      </condition>
-      <name>Instrument Landing - enabled</name>
-      <type>text</type>
-      <point-size>14</point-size>
-      <color>
-        <red>0.0</red>
-        <green>1.0</green>
-        <blue>0.0</blue>
-      </color>
-      <chunks>
-        <chunk>
-          <type>literal</type>
-          <text>IL</text>
-        </chunk>
-      </chunks>
-      <transformations>
-        <transformation>
-          <type>x-shift</type>
-          <offset>63</offset>
-        </transformation>
-        <transformation>
-          <type>y-shift</type>
-          <offset>-8</offset>
-        </transformation>
-      </transformations>
-    </layer>
-
 <!-- Mach Climb -->
     <layer>
       <condition>
@@ -540,7 +474,75 @@
   </layer>
 
 <!-- Instrument Landing -->
-<!-- nav1 hold & VFPS hold -->
+  <!-- disabled: no LOC set in NAV1 radio -->
+  <layer>
+    <condition>
+      <equals>
+        <property>/autopilot/locks/auto-landing</property>
+        <value>disabled</value>
+      </equals>
+    </condition>
+    <name>Instrument Landing - disabled</name>
+    <type>text</type>
+    <point-size>14</point-size>
+    <color>
+      <red>0.8</red>
+      <green>0.8</green>
+      <blue>0.8</blue>
+    </color>
+    <chunks>
+      <chunk>
+        <type>literal</type>
+        <text>IL</text>
+      </chunk>
+    </chunks>
+    <transformations>
+      <transformation>
+        <type>x-shift</type>
+        <offset>63</offset>
+      </transformation>
+      <transformation>
+        <type>y-shift</type>
+        <offset>-8</offset>
+      </transformation>
+    </transformations>
+  </layer>
+
+ <!-- enabled (but not engaged yet) -->
+  <layer>
+    <condition>
+      <equals>
+        <property>/autopilot/locks/auto-landing</property>
+        <value>enabled</value>
+      </equals>
+    </condition>
+    <name>Instrument Landing - enabled</name>
+    <type>text</type>
+    <point-size>14</point-size>
+    <color>
+      <red>0.0</red>
+      <green>1.0</green>
+      <blue>0.0</blue>
+    </color>
+    <chunks>
+      <chunk>
+        <type>literal</type>
+        <text>IL</text>
+      </chunk>
+    </chunks>
+    <transformations>
+      <transformation>
+        <type>x-shift</type>
+        <offset>63</offset>
+      </transformation>
+      <transformation>
+        <type>y-shift</type>
+        <offset>-8</offset>
+      </transformation>
+    </transformations>
+  </layer>
+
+  <!-- Engaged and LOC (but no GS yet) -->
   <layer>
     <condition>
       <and>
@@ -548,17 +550,12 @@
           <property>/autopilot/locks/auto-landing</property>
           <value>engaged</value>
         </equals>
-        <equals>
-          <property>/autopilot/locks/heading</property>
-          <value>nav1-hold</value>
-        </equals>
-        <equals>
-          <property>/autopilot/locks/altitude</property>
-          <value>atl-vfps-hold</value>
-        </equals>
+        <property>/instrumentation/nav/nav-loc</property>
+        <property>/instrumentation/nav/in-range</property>
+        <not><property>/instrumentation/nav/gs-in-range</property></not>
       </and>
     </condition>
-    <name>Instrument Landing Engaged 1</name>
+    <name>Instrument Landing Engaged Loc</name>
     <type>text</type>
     <point-size>14</point-size>
     <color>
@@ -584,7 +581,7 @@
     </transformations>
   </layer>
 
-<!-- nav1 hold & Flaps -->
+  <!-- LOC + GS -->
   <layer>
     <condition>
       <and>
@@ -592,23 +589,18 @@
           <property>/autopilot/locks/auto-landing</property>
           <value>engaged</value>
         </equals>
-        <equals>
-          <property>/autopilot/locks/heading</property>
-          <value>nav1-hold</value>
-        </equals>
-        <equals>
-          <property>/controls/flight/flaps</property>
-          <value>1</value>
-        </equals>
+        <property>/instrumentation/nav/nav-loc</property>
+        <property>/instrumentation/nav/in-range</property>
+        <property>/instrumentation/nav/gs-in-range</property>
       </and>
     </condition>
-    <name>Instrument Landing Engaged 2</name>
+    <name>Instrument Landing LOC+GS</name>
     <type>text</type>
     <point-size>14</point-size>
     <color>
-      <red>1.0</red>
-      <green>0.5</green>
-      <blue>0.0</blue>
+      <red>0.0</red>
+      <green>0.86</green>
+      <blue>1.0</blue>
     </color>
     <chunks>
       <chunk>
@@ -628,7 +620,7 @@
     </transformations>
   </layer>
 
-<!-- VFPS hold & < 400 ft agl -->
+<!-- IL Engaged but lost Loc signal (nav1) -->
   <layer>
     <condition>
       <and>
@@ -636,17 +628,13 @@
           <property>/autopilot/locks/auto-landing</property>
           <value>engaged</value>
         </equals>
-        <equals>
-          <property>/autopilot/locks/altitude</property>
-          <value>atl-vfps-hold</value>
-        </equals>
-        <less-than>
-          <property>/position/altitude-agl-ft</property>
-          <value>400</value>
-        </less-than>
+        <or>
+          <not><property>/instrumentation/nav/nav-loc</property></not>
+          <not><property>/instrumentation/nav/in-range</property></not>
+        </or>
       </and>
     </condition>
-    <name>Instrument Landing Engaged 3</name>
+    <name>Instrument Landing Engaged Lost Loc</name>
     <type>text</type>
     <point-size>14</point-size>
     <color>
