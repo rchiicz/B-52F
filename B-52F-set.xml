@@ -271,18 +271,32 @@ B-52F set file.
       </dialogs>
     </gui>
 
-    <!-- save some settings between sessions -->
+    <!-- Save some settings between sessions.
+         Must also add desired instruments to the "userarchive" props below  -->
     <aircraft-data>
       <path>/instrumentation/comm[0]/frequencies/selected-mhz</path>
       <path>/instrumentation/comm[0]/frequencies/standby-mhz</path>
+      
       <path>/instrumentation/comm[1]/frequencies/selected-mhz</path>
       <path>/instrumentation/comm[1]/frequencies/standby-mhz</path>
+      
       <path>/instrumentation/nav[0]/frequencies/selected-mhz</path>
       <path>/instrumentation/nav[0]/frequencies/standby-mhz</path>
+      <path>/instrumentation/nav[0]/radials/selected-deg</path>
+      
       <path>/instrumentation/nav[1]/frequencies/selected-mhz</path>
       <path>/instrumentation/nav[1]/frequencies/standby-mhz</path>
+      <path>/instrumentation/nav[1]/radials/selected-deg</path>
+      
       <path>/instrumentation/adf[0]/frequencies/selected-khz</path>
       <path>/instrumentation/adf[0]/frequencies/standby-khz</path>
+
+      <path>/instrumentation/dme/switch-position</path>
+      
+      <path>/autopilot/settings/heading-bug-deg</path>
+      <path>/autopilot/settings/target-altitude-ft</path>
+      <path>/autopilot/settings/target-agl-ft</path>
+      <path>/autopilot/settings/target-speed-kt</path>
     </aircraft-data>
   </sim>
 
@@ -421,7 +435,7 @@ B-52F set file.
       <take-off-phase type="string">initialised</take-off-phase>
     </locks>
 
-    <settings>
+    <settings userarchive="y">
       <approach-aoa-deg type="float">1.0</approach-aoa-deg>
       <approach-spoiler-low-weight-lbs type="float">240000</approach-spoiler-low-weight-lbs>
       <approach-spoiler-max-weight-lbs type="float">360000</approach-spoiler-max-weight-lbs>
@@ -575,6 +589,7 @@ B-52F set file.
     <nav n="0" userarchive="y"></nav>
     <nav n="1" userarchive="y"></nav>
     <adf n="0" userarchive="y"></adf>
+    <dme n="0" userarchive="y"></dme>
 
   </instrumentation>
 
