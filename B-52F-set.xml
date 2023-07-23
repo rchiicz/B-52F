@@ -235,13 +235,13 @@ B-52F set file.
       <line> AH - Altitude hold</line>
       <line> TF - Terrain follow/AGL hold</line>
       <line> TO - Auto take-off</line>
-      <line> IL - ILS/Auto landing (enabled after clicking AH mode on)</line>
+      <line> IL - ILS/Auto landing (enabled if a runway localizer is tuned in NAV1)</line>
       <line> MC - Mach Climb</line>
       <line></line>
-      <line>Click on AP Mode to turn off all A/P locks.</line>
+      <line>Click on "AP Mode" to turn off all auto-pilot locks.</line>
       <line></line>
-      <line>The 2D VFR panel (Shift-P) is just a place-holder for the radio instruments</line>
-      <line> - use the 2D mini-panel to control the aircraft (Shift-S).</line>
+      <line>The 2D Main panel (Shift-P) is not realistic, but has standard instruments.</line>
+      <line>The 2D Mini panel (Shift-S) has detailed text-based aircraft status instruments.</line>
       <line></line>
       <line>Set the Altitude hold and TF/AGL settings via the autopilot menu.</line>
       <line>If an AP Mode is grayed out it is not available.</line>

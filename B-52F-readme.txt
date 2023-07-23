@@ -247,21 +247,15 @@ Panels
 ------
 Currently, there are two simple 2D panels for the model, neither of
 which are in any way accurate - they are simply holders for the
-instruments.  The 'vfr' panel includes the basic instruments needed
-for 'vfr' and calls the 'standard' FlightGear instruments from the
-FlightGear installation.  The 'mini' panel includes a subset of the
-instruments on the 'vfr' panel, with a transparent background.
+instruments.  The 'main' panel includes the basic instruments needed
+for VFR or IFR flight and has some 'standard' FlightGear instruments.
+The 'mini' panel includes a subset of the flight instruments and
+includes several text-based informational instruments.
 
 In addition to the standard FG instruments, both panels also
 incorporate a number of custom instruments.  These are mostly
 informational but two of them can be used to control some of the
 Autopilot functions - see below.
-
-Custom Controller Instruments
------------------------------
-There are two custom instruments on both the 'vfr' and 'mini' panels
-that can be used to control some of the autopilot functions.  These
-are the speed controller and the altitude mode controller.
 
 AP Speed Controller
 -------------------
@@ -326,11 +320,11 @@ true heading-hold.
 
 IL Mode
 -------
-The IL (automatic instrument landing) mode is enabled to select after
-clicking the AH (Altitude Hold) enable.  It will attempt to get the
-a/c on the nav1 ILS heading & then follow it, configure the a/c for
+The IL (automatic instrument landing) mode is enabled if a runway
+localizer is tuned in the NAV1 radio.  It will attempt to get the
+a/c on the ILS heading & then follow it, configure the a/c for
 landing and get it on to the glideslope, follow the glide-slope down
-and perform a landing.  Both the front and rear landing gear will be 
+and perform a landing.  The front and rear landing gear can be 
 correctly aligned for any cross-winds but you will need to steer the
 front gear as the rear gear are aligned with the fuselage during the
 roll-out.
