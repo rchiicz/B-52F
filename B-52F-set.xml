@@ -12,10 +12,6 @@ B-52F set file.
 <PropertyList>
   <sim>
 
-    <startup>
-      <splash-texture>Aircraft/B-52F/B-52F-splash.rgb</splash-texture>
-    </startup>
-
     <flight-model>yasim</flight-model>
     <status>beta</status>
     <minimum-fg-version>2018.3.0</minimum-fg-version>
@@ -45,6 +41,38 @@ B-52F set file.
     </tags>
     
     <description>Boeing B-52 F in Arclight colour scheme</description>
+    <previews>
+      <preview>
+        <type>exterior</type>
+        <splash type="bool">true</splash>
+        <path>Previews/B-52F-orig-splash.png</path>
+      </preview>
+      <preview>
+        <type>panel</type>
+        <splash type="bool">false</splash>
+        <path>Previews/cockpit-1.png</path>
+      </preview>
+      <preview>
+        <type>panel</type>
+        <splash type="bool">false</splash>
+        <path>Previews/cockpit-2.png</path>
+      </preview>
+      <preview>
+        <type>exterior</type>
+        <splash type="bool">true</splash>
+        <path>Previews/approach.png</path>
+      </preview>
+      <preview>
+        <type>exterior</type>
+        <splash type="bool">true</splash>
+        <path>Previews/exterior-sfo.png</path>
+      </preview>
+      <preview>
+        <type>exterior</type>
+        <splash type="bool">true</splash>
+        <path>Previews/touchdown.png</path>
+      </preview>
+    </previews>
 
     <!-- selectable starting states -->
     <state n="0" include="States/take-off-overlay.xml"/>
@@ -295,8 +323,6 @@ B-52F set file.
       
       <path>/autopilot/settings/heading-bug-deg</path>
       <path>/autopilot/settings/target-altitude-ft</path>
-      <path>/autopilot/settings/target-agl-ft</path>
-      <path>/autopilot/settings/target-speed-kt</path>
     </aircraft-data>
   </sim>
 
@@ -612,7 +638,38 @@ B-52F set file.
      <speed>225</speed>
     </max-flap-extension-speed>
   </limits>
-  
+
+  <!-- Aircraft performance data (for flight planning, etc.) -->
+	<aircraft>
+		<icao>
+			<wake-turbulence-category>H</wake-turbulence-category>
+			<type type="string">B52</type>
+			<equipment type="string">SDFG</equipment>
+			<surveillance type="string">3</surveillance>
+		</icao>
+		<performance>
+			<minimum>
+				<takeoff-length-ft type="int">9000</takeoff-length-ft>
+				<landing-length-ft type="int">5000</landing-length-ft>
+			</minimum>
+			<maximum>
+				<altitude-ft type="int">50000</altitude-ft>
+				<mach type="double">0.88</mach>
+				<airspeed-knots type="int">390</airspeed-knots>
+			</maximum>
+      <cruise>
+        <mach type="double">0.77</mach>
+        <flight-level type="int">450</flight-level>
+      </cruise>
+      <approach>
+        <airspeed-knots type="int">140</airspeed-knots>
+      </approach>
+
+      <!-- give a semi-reasonable flight category -->
+			<icao-category type="string">E</icao-category>
+		</performance>
+	</aircraft>
+
   <nasal>
     <B52F>
       <file>Aircraft/B-52F/Nasal/B-52F.nas</file>
