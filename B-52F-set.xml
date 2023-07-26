@@ -624,14 +624,14 @@ B-52F set file.
   
   <limits>
     <!-- overspeed at Vmo (indicated airspeed knots) or Mmo (mach number) -->
-    <vmo>390</vmo>
+    <vmo>450</vmo>
     <mmo>0.90</mmo>
     
-    <!-- flaps and gear limits set just above what "autoland" script uses to deploy -->
+    <!-- flaps and gear limits are generous.  No damage is modelled. -->
     <max-gear-extension-speed>180</max-gear-extension-speed>
     <max-flap-extension-speed>
-     <flaps>0.99</flaps>
-     <speed>230</speed>
+     <flaps>0.01</flaps>
+     <speed>270</speed>
     </max-flap-extension-speed>
   </limits>
 
