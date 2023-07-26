@@ -537,34 +537,6 @@ Enhanced for FG Version 2020.3 by Ron Horn <rchiicz@gmail.com>
    <h>16</h>
   </instrument>
 
-    <instrument include="Aircraft/Instruments/radar.xml">
-      <name>Radar</name>
-      <condition>
-        <equals>
-          <property>instrumentation/radar/minimized</property>
-          <value>false</value>
-        </equals>
-      </condition>
-      <x>944</x>
-      <y>110</y>
-      <w>160</w>
-      <h>160</h>
-    </instrument>
-
-    <instrument include="Aircraft/Instruments/radar-minimized.xml">
-      <name>Radar-minimized</name>
-      <condition>
-        <equals>
-          <property>instrumentation/radar/minimized</property>
-          <value>true</value>
-        </equals>
-      </condition>
-      <x>430</x>
-      <y>30</y>
-      <w>44</w>
-      <h>16</h>
-    </instrument>
-
  </instruments>
 
 </PropertyList>

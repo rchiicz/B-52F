@@ -586,10 +586,6 @@ B-52F set file.
   </consumables>
 
   <instrumentation>
-    <radar>
-      <range type="int" archive="y">40</range>
-      <minimized type="bool" archive="y">true</minimized>
-    </radar>
     <terrain-radar>
       <hi-elev>
         <alt-ft type="double">-9999.9</alt-ft>
@@ -629,13 +625,13 @@ B-52F set file.
   <limits>
     <!-- overspeed at Vmo (indicated airspeed knots) or Mmo (mach number) -->
     <vmo>390</vmo>
-    <mmo>0.88</mmo>
+    <mmo>0.90</mmo>
     
     <!-- flaps and gear limits set just above what "autoland" script uses to deploy -->
-    <max-gear-extension-speed>175</max-gear-extension-speed>
+    <max-gear-extension-speed>180</max-gear-extension-speed>
     <max-flap-extension-speed>
-     <flaps>0.25</flaps>
-     <speed>225</speed>
+     <flaps>0.99</flaps>
+     <speed>230</speed>
     </max-flap-extension-speed>
   </limits>
 
@@ -679,7 +675,7 @@ B-52F set file.
 	    <file>Aircraft/B-52F/Nasal/lights.nas</file>
       <script>start_up();</script>
     </B52F>
-	<aar>
+	  <aar>
       <file>Aircraft/Generic/aar.nas</file>
     </aar>
    </nasal>

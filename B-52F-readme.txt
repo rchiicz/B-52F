@@ -230,6 +230,10 @@ Crab take-off is possible by setting the crab angle on the runway, and then
 use normal rudder controls (keys or pedals) to align down the runway during
 the take off roll.
 
+Air-to-Air Refueling is enabled.  Use the "AI | Tanker Controls" menu item
+to generate a KC-135 and give it a try.  Note that the generic 'radar'
+instrument is not included (it's broken, and gui Map dialog works fine
+to find the tanker: turn on 'Traffic' to find it).
 
 Keyboard mapping
 ----------------
